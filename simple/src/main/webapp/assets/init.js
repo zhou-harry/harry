@@ -1,0 +1,190 @@
+require.config({
+
+  paths: {
+	  "container":"container",
+	  //react
+	  "react": "js/react/react",
+	  "react-addons": "js/react/react-with-addons",
+	  "react-dom":"js/react/react-dom",
+	  "jsx":"js/react/jsx",
+	  "JSXTransformer":"js/react/JSXTransformer",
+	  "text":"js/react/text",
+	  "browser.min":"js/react/browser.min",
+	  //jquery
+	  'jquery':'js/jquery.min',
+	  'jquery.tooltipster':'js/tip/jquery.tooltipster',
+	  'jquery.form':'js/jquery.form',
+	  'jquery.cookie':'js/skin-select/jquery.cookie',
+	  'jquery.easing':'js/slidebars/jquery.easing.min',
+	  'jquery.easypiechart':'js/gage/jquery.easypiechart.min',
+	  'jquery.treeview':'js/tree/jquery.treeview',
+	  'jquery.tabelizer':'js/tree/tabelizer/jquery.tabelizer',
+	  'jquery-ui-1.10.4.custom':'js/tree/tabelizer/jquery.jquery-ui-1.10.4.custom.min',
+	  'jquery-ui':'js/tree/treetable/vendor/jquery-ui',
+	  'jquery.treetable':'js/tree/treetable/javascripts/src/jquery.treetable',
+	  'jquery.cookie.tree':'js/tree/lib/jquery.cookie',
+	  //MAIN EFFECT
+	  'preloader':'js/preloader',
+	  'bootstrap':'js/bootstrap',
+	  'app':'js/app',
+	  'load':'js/load',
+	  'main':'js/main',
+	  'footable':'js/footable/js/footable',
+	  'footable.filter':'js/footable/js/footable.filter',
+	  'footable.paginate':'js/footable/js/footable.paginate',
+	  'footable.sort':'js/footable/js/footable.sort',
+	  'dropzone':'js/dropZone/lib/dropzone',
+	  //Acordion and Sliding menu
+	  'scriptbreaker-multiple-accordion':'js/custom/scriptbreaker-multiple-accordion-1',
+	  //Sliding Effect Control
+	  'skin-select':'js/skin-select/skin-select',
+	  //Right Sliding menu
+	  'slidebars.min':'js/slidebars/slidebars.min',
+	  'raphael':'js/gage/raphael.2.1.0.min',
+	  'justgage':'js/gage/justgage',
+	  //view
+	  "login":"./../view/ui/login/login",
+	  "dashboard":"./../view/ui/dashboard",
+	  "block":"./../view/ui/block/block",
+	  "block-half":"./../view/ui/block/block-half",
+	  "form-basic":"./../view/ui/form/form-basic",
+	  "table-dynamic":"./../view/ui/table/table-dynamic",
+	  "tree":"./../view/ui/tree/tree",
+	  "toolMixin":"./../view/ui/tool/toolMixin",
+	  "toolFilter":"./../view/ui/tool/toolFilter",
+	  
+	  "top":"./../view/ui/top/top",
+	  "top-left":"./../view/ui/top/top-left",
+	  "top-title":"./../view/ui/top/top-title",
+	  "top-right":"./../view/ui/top/top-right",
+	  
+	  "sidebar-right":"./../view/ui/sidebar/sidebar-right",
+	  "sidebar":"./../view/ui/sidebar/sidebar",
+	  "dark":"./../view/ui/sidebar/dark",
+	  "logo":"./../view/ui/sidebar/logo",
+	  "toggle":"./../view/ui/sidebar/toggle",
+	  "tree-wrap":"./../view/ui/sidebar/tree-wrap",
+	  "nest-tree":"./../view/ui/sidebar/nest-tree",
+	  "nest-dash":"./../view/ui/sidebar/nest-dash",
+	  
+	  "right-wrap":"./../view/ui/right/right-wrap",
+	  "right-top-title":"./../view/ui/right/right-top-title",
+	  "right-top-loginInfo":"./../view/ui/right/right-top-loginInfo",
+	  "right-top-widget":"./../view/ui/right/right-top-widget",
+	  "right-top-navi":"./../view/ui/right/right-top-navi",
+	  
+	  "index":"./../view/ui/content/index",
+	  "role":"./../view/role/role",
+	  "roleUser":"./../view/role/roleUser",
+	  
+	  //test
+	  "testTick":"./../view/ui/test/testTick",
+	  
+	  //css
+	  "css-style":"../assets/css/style",
+	  "css-loader-style":"../assets/css/loader-style",
+	  "css-bootstrap":"../assets/css/bootstrap",
+	  "css-flat-all":"../assets/js/iCheck/flat/all",
+	  "css-line-all":"../assets/js/iCheck/line/all",
+	  "css-bootstrap-colorpicker":"../assets/js/colorPicker/bootstrap-colorpicker",
+	  "css-bootstrap-switch":"../assets/js/switch/bootstrap-switch",
+	  "css-validate":"../assets/js/validate/validate",
+	  "css-jquery.idealforms":"../assets/js/idealform/css/jquery.idealforms",
+	  "css-signin":"../assets/css/signin",
+	  "css-tooltipster":"js/tip/tooltipster",
+	  "css-footable.core":"js/footable/css/footable.core",
+	  "css-footable.standalone":"js/footable/css/footable.standalone",
+	  "css-footable.demos":"js/footable/css/footable-demos",
+	  "css-jquery.treeview":"js/tree/jquery.treeview",
+	  "css-jquery.treetable":"js/tree/treetable/stylesheets/jquery.treetable",
+	  "css-jquery.treetable.theme.default":"js/tree/treetable/stylesheets/jquery.treetable.theme.default",
+	  "css-tabelizer":"js/tree/tabelizer/tabelizer.min",
+	  "css-dropzone":"js/dropZone/downloads/css/dropzone",
+  },
+  map: {
+	    '*': {
+		'css': 'js/require/css'
+  		}
+  },
+  shim : {
+	  "jquery.tooltipster":['css!css-tooltipster','jquery'],
+	  "footable.filter":['footable'],
+	  "footable.paginate":['footable'],
+	  "footable.sort":['footable'],
+	  "footable":['css!css-footable.core','css!css-footable.standalone','css!css-footable.demos','jquery'],
+	  "dropzone":['css!css-dropzone','jquery'],
+	  "jquery.form":['jquery'],
+	  "jquery.cookie":['jquery'],
+	  "jquery-ui":['jquery'],
+	  "jquery-ui-1.10.4.custom":['jquery'],
+	  "jquery.treeview":['jquery','css!css-jquery.treeview',],
+	  "jquery.tabelizer":['jquery','css!css-tabelizer'],
+	  "jquery.treetable":['jquery','css!css-jquery.treetable','css!css-jquery.treetable.theme.default'],
+	  "scriptbreaker-multiple-accordion":['jquery'],
+	  "jquery.easing":['jquery'],
+	  "jquery.easypiechart":['jquery'],
+	  "sidebar":['jquery'],
+	  "preloader":['jquery'],
+	  "bootstrap":['jquery'],
+	  "load":['jquery'],
+	  "main":['jquery','load',],
+	  "app":['jquery',
+	         'load',
+	         'scriptbreaker-multiple-accordion',
+	         'jquery.easypiechart',
+	         'jquery.cookie',
+	         'jquery.easing',
+	         'slidebars.min',
+	         'footable.filter',
+             'footable.paginate',
+             'footable.sort',
+             'dropzone',
+             'jquery.treeview',
+             'jquery.tabelizer',
+             'jquery.treetable',
+//             'jquery.-ui-1.10.4.custom',
+//             'jquery.ui',
+             'jquery.cookie.tree',],
+	  
+	  "jsx!container": ['css!css-style',
+	                    'css!css-loader-style',
+	                    'css!css-bootstrap',
+	                    'css!css-flat-all',
+	                    'css!css-line-all',
+	                    'css!css-bootstrap-colorpicker',
+	                    'css!css-bootstrap-switch',
+	                    'css!css-validate',
+	                    'css!css-jquery.idealforms',
+	                    'jsx!login',
+	                    'jsx!dashboard',
+	                    ],
+      "jsx!login":['css!css-loader-style',
+                   'css!css-bootstrap',
+                   'css!css-signin',
+                   'jquery.form',
+                   'jquery',
+                   'preloader',
+                   'bootstrap',
+                   ],
+       "jsx!right-wrap":['jsx!index',
+                         'jsx!role',
+                         'jsx!roleUser',
+                    ],
+  },
+  jsx: {
+    fileExtension: '.jsx',
+    harmony: true,
+    stripTypes: true
+  }
+});
+
+require(['react-addons', 'jsx!container'], function(React, Container) {
+	Container = React.createFactory(Container);
+	React.render(
+			Container({data:{url:'jsx!login'}}),
+			document.getElementById('app-container'),
+			function(){
+//				require(['app']);
+			}
+	);
+});

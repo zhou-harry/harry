@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+		
+	<mvc:default-servlet-handler/>
+	<context:annotation-config />
+	<context:component-scan base-package="com.harry" >
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />   
+    	<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />
+	</context:component-scan>
+	<!-- springmvc传json值时的乱码解决 -->
+	<mvc:annotation-driven>
+	    <mvc:message-converters>
+	        <bean class="org.springframework.http.converter.StringHttpMessageConverter">
+	            <property name="supportedMediaTypes">
+	                <list>
+	                    <value>application/json;charset=UTF-8</value>
+	                </list>
+	            </property>
+	        </bean>
+	    </mvc:message-converters>
+	</mvc:annotation-driven>
+	
+	<mvc:interceptors>
+	<!-- 访问拦截 -->
+	<mvc:interceptor>
+		<mvc:mapping path="/**/**" />
+		<bean class="com.harry.util.interceptor.LoginHandlerInterceptor" />
+	</mvc:interceptor>
+	<!-- 防止使用浏览器后退按钮 -->
+	<mvc:interceptor>
+		<mvc:mapping path="/**/*" />
+		<bean id="webContentInterceptor"
+			class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+			<property name="cacheSeconds" value="0" />
+			<property name="useExpiresHeader" value="true" />
+			<property name="useCacheControlHeader" value="true" />
+			<property name="useCacheControlNoStore" value="true" />
+		</bean>
+	</mvc:interceptor>
+
+</mvc:interceptors>
+
+	<!-- 配置SpringMVC的视图解析器 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/view/" />
+		<property name="suffix" value=".html" />
+	</bean>
+</beans>
