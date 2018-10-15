@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/harry">
+  <process id="nativeProcess" name="动态流程模板" isExecutable="true">
+    <documentation>动态适配各种场景的流程模板</documentation>
+    <extensionElements>
+      <activiti:executionListener event="start" class="com.harry.bpm.listener.ExecutionProcessStartListener"></activiti:executionListener>
+      <activiti:executionListener event="end" class="com.harry.bpm.listener.ExecutionProcessEndListener"></activiti:executionListener>
+    </extensionElements>
+    <startEvent id="start" name="Start"></startEvent>
+    <serviceTask id="MappingService" name="MappingService" activiti:class="com.harry.bpm.service.MappingService"></serviceTask>
+    <sequenceFlow id="flow1" sourceRef="start" targetRef="MappingService"></sequenceFlow>
+    <exclusiveGateway id="exclusivegateway1" name="Exclusive Gateway" default="flow36"></exclusiveGateway>
+    <sequenceFlow id="flow2" sourceRef="MappingService" targetRef="exclusivegateway1"></sequenceFlow>
+    <endEvent id="copyEnd" name="End"></endEvent>
+    <userTask id="multiTask" name="Multi Task" activiti:candidateUsers="${candidate}">
+      <extensionElements>
+        <activiti:taskListener event="create" class="com.harry.bpm.listener.TaskMultiStartListener"></activiti:taskListener>
+        <activiti:taskListener event="complete" class="com.harry.bpm.listener.TaskMultiCompleteListener"></activiti:taskListener>
+      </extensionElements>
+      <multiInstanceLoopCharacteristics isSequential="false" activiti:collection="ACT_CANDIDATE_LIST" activiti:elementVariable="candidate"></multiInstanceLoopCharacteristics>
+    </userTask>
+    <exclusiveGateway id="exclusivegateway3" name="Exclusive Gateway" default="flow18">
+      <extensionElements>
+        <activiti:executionListener event="start" class="com.harry.bpm.listener.ExclusiveTaskListener"></activiti:executionListener>
+      </extensionElements>
+    </exclusiveGateway>
+    <userTask id="userTask" name="User Task">
+      <extensionElements>
+        <activiti:taskListener event="create" class="com.harry.bpm.listener.TaskSingleStartListener"></activiti:taskListener>
+        <activiti:taskListener event="complete" class="com.harry.bpm.listener.TaskSingleCompleteListener"></activiti:taskListener>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="flow9" sourceRef="exclusivegateway3" targetRef="multiTask">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${ACT_TASK_MULTI =="Y"}]]></conditionExpression>
+    </sequenceFlow>
+    <exclusiveGateway id="exclusivegateway4" name="Exclusive Gateway" default="flow15"></exclusiveGateway>
+    <sequenceFlow id="flow11" sourceRef="multiTask" targetRef="exclusivegateway4"></sequenceFlow>
+    <exclusiveGateway id="exclusivegateway5" name="Exclusive Gateway" default="flow16"></exclusiveGateway>
+    <sequenceFlow id="flow12" sourceRef="userTask" targetRef="exclusivegateway5"></sequenceFlow>
+    <inclusiveGateway id="inclusivegateway" name="Inclusive Gateway"></inclusiveGateway>
+    <sequenceFlow id="flow15" sourceRef="exclusivegateway4" targetRef="inclusivegateway"></sequenceFlow>
+    <sequenceFlow id="flow16" sourceRef="exclusivegateway5" targetRef="inclusivegateway"></sequenceFlow>
+    <sequenceFlow id="flow17" sourceRef="inclusivegateway" targetRef="MappingService"></sequenceFlow>
+    <parallelGateway id="parallelgateway" name="Parallel Gateway"></parallelGateway>
+    <sequenceFlow id="flow18" sourceRef="exclusivegateway3" targetRef="parallelgateway"></sequenceFlow>
+    <sequenceFlow id="flow19" sourceRef="parallelgateway" targetRef="userTask"></sequenceFlow>
+    <exclusiveGateway id="exclusivegateway6" name="Exclusive Gateway" default="flow24"></exclusiveGateway>
+    <sequenceFlow id="flow20" sourceRef="parallelgateway" targetRef="exclusivegateway6"></sequenceFlow>
+    <userTask id="copyTask" name="Copy Task" activiti:candidateUsers="${copy}">
+      <extensionElements>
+        <activiti:taskListener event="create" class="com.harry.bpm.listener.TaskCopyStartListener"></activiti:taskListener>
+        <activiti:taskListener event="complete" class="com.harry.bpm.listener.TaskCopyCompleteListener"></activiti:taskListener>
+      </extensionElements>
+      <multiInstanceLoopCharacteristics isSequential="false" activiti:collection="ACT_COPY_LIST" activiti:elementVariable="copy"></multiInstanceLoopCharacteristics>
+    </userTask>
+    <sequenceFlow id="flow22" sourceRef="exclusivegateway6" targetRef="copyTask">
+      <extensionElements>
+        <activiti:executionListener event="take" class="com.harry.bpm.listener.ExecutionCopyListener"></activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${ACT_COPY_TYPE == "Y"}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow24" sourceRef="exclusivegateway6" targetRef="copyEnd"></sequenceFlow>
+    <boundaryEvent id="taskTimer" name="Timer" attachedToRef="userTask" cancelActivity="true">
+      <extensionElements>
+        <activiti:executionListener event="end" class="com.harry.bpm.listener.ExecutionSingleJobListener"></activiti:executionListener>
+      </extensionElements>
+      <timerEventDefinition>
+        <timeCycle>${ACT_TASK_TIMER}</timeCycle>
+      </timerEventDefinition>
+    </boundaryEvent>
+    <boundaryEvent id="msgTimer" name="Timer" attachedToRef="userTask" cancelActivity="false">
+      <timerEventDefinition>
+        <timeCycle>R3/PT5S</timeCycle>
+      </timerEventDefinition>
+    </boundaryEvent>
+    <serviceTask id="singleService" name="Service Task" activiti:class="com.harry.bpm.service.SingleJobService"></serviceTask>
+    <sequenceFlow id="flow26" sourceRef="msgTimer" targetRef="singleService"></sequenceFlow>
+    <endEvent id="cancel" name="TerminateEndEvent">
+      <terminateEventDefinition></terminateEventDefinition>
+    </endEvent>
+    <sequenceFlow id="flow31" sourceRef="exclusivegateway5" targetRef="cancel">
+      <extensionElements>
+        <activiti:executionListener event="take" class="com.harry.bpm.listener.ExecutionRejectedListener"></activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${ACT_AGREED_COUNT<=0 }]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow32" sourceRef="exclusivegateway4" targetRef="cancel">
+      <extensionElements>
+        <activiti:executionListener event="take" class="com.harry.bpm.listener.ExecutionRejectedListener"></activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${ACT_AGREED_COUNT<=0}]]></conditionExpression>
+    </sequenceFlow>
+    <receiveTask id="receiveTask" name="BusinessTask">
+      <documentation>执行业务Pending</documentation>
+      <extensionElements>
+        <activiti:executionListener event="start" class="com.harry.bpm.listener.ExecutionReceiveListener"></activiti:executionListener>
+      </extensionElements>
+    </receiveTask>
+    <sequenceFlow id="flow8" sourceRef="exclusivegateway1" targetRef="receiveTask">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${ACT_TASK_PENDING=="Y"}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow35" sourceRef="receiveTask" targetRef="exclusivegateway3"></sequenceFlow>
+    <sequenceFlow id="flow36" sourceRef="exclusivegateway1" targetRef="exclusivegateway3"></sequenceFlow>
+    <endEvent id="completed" name="TerminateEndEvent">
+      <terminateEventDefinition></terminateEventDefinition>
+    </endEvent>
+    <sequenceFlow id="flow37" sourceRef="exclusivegateway1" targetRef="completed">
+      <extensionElements>
+        <activiti:executionListener event="take" class="com.harry.bpm.listener.ExecutionNoTaskListener"></activiti:executionListener>
+      </extensionElements>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${ACT_TASK_NEXT != "Y"}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flow38" sourceRef="taskTimer" targetRef="userTask"></sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_nativeProcess">
+    <bpmndi:BPMNPlane bpmnElement="nativeProcess" id="BPMNPlane_nativeProcess">
+      <bpmndi:BPMNShape bpmnElement="start" id="BPMNShape_start">
+        <omgdc:Bounds height="35.0" width="35.0" x="36.0" y="55.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="MappingService" id="BPMNShape_MappingService">
+        <omgdc:Bounds height="55.0" width="105.0" x="116.0" y="45.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway1" id="BPMNShape_exclusivegateway1">
+        <omgdc:Bounds height="40.0" width="40.0" x="350.0" y="52.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="copyEnd" id="BPMNShape_copyEnd">
+        <omgdc:Bounds height="35.0" width="35.0" x="455.0" y="55.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="multiTask" id="BPMNShape_multiTask">
+        <omgdc:Bounds height="55.0" width="105.0" x="220.0" y="306.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway3" id="BPMNShape_exclusivegateway3">
+        <omgdc:Bounds height="40.0" width="40.0" x="350.0" y="202.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="userTask" id="BPMNShape_userTask">
+        <omgdc:Bounds height="55.0" width="105.0" x="420.0" y="306.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway4" id="BPMNShape_exclusivegateway4">
+        <omgdc:Bounds height="40.0" width="40.0" x="252.0" y="407.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway5" id="BPMNShape_exclusivegateway5">
+        <omgdc:Bounds height="40.0" width="40.0" x="452.0" y="407.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="inclusivegateway" id="BPMNShape_inclusivegateway">
+        <omgdc:Bounds height="40.0" width="40.0" x="350.0" y="510.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="parallelgateway" id="BPMNShape_parallelgateway">
+        <omgdc:Bounds height="40.0" width="40.0" x="452.0" y="202.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="exclusivegateway6" id="BPMNShape_exclusivegateway6">
+        <omgdc:Bounds height="40.0" width="40.0" x="452.0" y="124.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="copyTask" id="BPMNShape_copyTask">
+        <omgdc:Bounds height="55.0" width="105.0" x="570.0" y="117.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="taskTimer" id="BPMNShape_taskTimer">
+        <omgdc:Bounds height="30.0" width="30.0" x="420.0" y="320.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="msgTimer" id="BPMNShape_msgTimer">
+        <omgdc:Bounds height="30.0" width="30.0" x="496.0" y="320.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="singleService" id="BPMNShape_singleService">
+        <omgdc:Bounds height="55.0" width="105.0" x="570.0" y="306.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="cancel" id="BPMNShape_cancel">
+        <omgdc:Bounds height="35.0" width="35.0" x="353.0" y="410.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="receiveTask" id="BPMNShape_receiveTask">
+        <omgdc:Bounds height="55.0" width="105.0" x="220.0" y="117.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="completed" id="BPMNShape_completed">
+        <omgdc:Bounds height="35.0" width="35.0" x="353.0" y="0.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="flow1" id="BPMNEdge_flow1">
+        <omgdi:waypoint x="71.0" y="72.0"></omgdi:waypoint>
+        <omgdi:waypoint x="116.0" y="72.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow2" id="BPMNEdge_flow2">
+        <omgdi:waypoint x="221.0" y="72.0"></omgdi:waypoint>
+        <omgdi:waypoint x="350.0" y="72.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow9" id="BPMNEdge_flow9">
+        <omgdi:waypoint x="350.0" y="222.0"></omgdi:waypoint>
+        <omgdi:waypoint x="272.0" y="221.0"></omgdi:waypoint>
+        <omgdi:waypoint x="272.0" y="306.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow11" id="BPMNEdge_flow11">
+        <omgdi:waypoint x="272.0" y="361.0"></omgdi:waypoint>
+        <omgdi:waypoint x="272.0" y="407.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow12" id="BPMNEdge_flow12">
+        <omgdi:waypoint x="472.0" y="361.0"></omgdi:waypoint>
+        <omgdi:waypoint x="472.0" y="407.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow15" id="BPMNEdge_flow15">
+        <omgdi:waypoint x="272.0" y="447.0"></omgdi:waypoint>
+        <omgdi:waypoint x="370.0" y="510.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow16" id="BPMNEdge_flow16">
+        <omgdi:waypoint x="472.0" y="447.0"></omgdi:waypoint>
+        <omgdi:waypoint x="370.0" y="510.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow17" id="BPMNEdge_flow17">
+        <omgdi:waypoint x="350.0" y="530.0"></omgdi:waypoint>
+        <omgdi:waypoint x="172.0" y="529.0"></omgdi:waypoint>
+        <omgdi:waypoint x="168.0" y="100.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow18" id="BPMNEdge_flow18">
+        <omgdi:waypoint x="390.0" y="222.0"></omgdi:waypoint>
+        <omgdi:waypoint x="452.0" y="222.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow19" id="BPMNEdge_flow19">
+        <omgdi:waypoint x="472.0" y="242.0"></omgdi:waypoint>
+        <omgdi:waypoint x="472.0" y="306.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow20" id="BPMNEdge_flow20">
+        <omgdi:waypoint x="472.0" y="202.0"></omgdi:waypoint>
+        <omgdi:waypoint x="472.0" y="164.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow22" id="BPMNEdge_flow22">
+        <omgdi:waypoint x="492.0" y="144.0"></omgdi:waypoint>
+        <omgdi:waypoint x="570.0" y="144.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow24" id="BPMNEdge_flow24">
+        <omgdi:waypoint x="472.0" y="124.0"></omgdi:waypoint>
+        <omgdi:waypoint x="472.0" y="90.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow26" id="BPMNEdge_flow26">
+        <omgdi:waypoint x="526.0" y="335.0"></omgdi:waypoint>
+        <omgdi:waypoint x="570.0" y="333.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow31" id="BPMNEdge_flow31">
+        <omgdi:waypoint x="452.0" y="427.0"></omgdi:waypoint>
+        <omgdi:waypoint x="388.0" y="427.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow32" id="BPMNEdge_flow32">
+        <omgdi:waypoint x="292.0" y="427.0"></omgdi:waypoint>
+        <omgdi:waypoint x="353.0" y="427.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow8" id="BPMNEdge_flow8">
+        <omgdi:waypoint x="370.0" y="92.0"></omgdi:waypoint>
+        <omgdi:waypoint x="272.0" y="117.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow35" id="BPMNEdge_flow35">
+        <omgdi:waypoint x="272.0" y="172.0"></omgdi:waypoint>
+        <omgdi:waypoint x="370.0" y="202.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow36" id="BPMNEdge_flow36">
+        <omgdi:waypoint x="370.0" y="92.0"></omgdi:waypoint>
+        <omgdi:waypoint x="370.0" y="202.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow37" id="BPMNEdge_flow37">
+        <omgdi:waypoint x="370.0" y="52.0"></omgdi:waypoint>
+        <omgdi:waypoint x="370.0" y="35.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="flow38" id="BPMNEdge_flow38">
+        <omgdi:waypoint x="450.0" y="335.0"></omgdi:waypoint>
+        <omgdi:waypoint x="525.0" y="333.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
