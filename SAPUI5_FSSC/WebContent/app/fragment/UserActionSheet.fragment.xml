@@ -1,0 +1,10 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ActionSheet showCancelButton="false" placement="Bottom">
+		<buttons>
+			<Button id="ID1" text="用户设置" icon="sap-icon://account" press="userActionSelected" />
+			<Button id="ID2" text="锁屏" icon="sap-icon://locked" press="onLockScreen" />
+			<Button id="ID3" text="注销" icon="sap-icon://log" press="onLogout" />
+		</buttons>
+	</ActionSheet>
+</core:FragmentDefinition>

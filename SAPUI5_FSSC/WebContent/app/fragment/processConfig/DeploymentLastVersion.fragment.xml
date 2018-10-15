@@ -1,0 +1,17 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ResponsivePopover title="挂载的流程模板" placement="Left">
+		<content>
+			<List
+				mode="None"
+				includeItemInSelection="true"
+				select="handleItemSelect"
+				items="{deploy>/}">
+				<StandardListItem 
+					title="{deploy>name}" 
+					counter="{deploy>version}"/>
+			</List>
+		</content>
+	</ResponsivePopover>
+</core:FragmentDefinition>

@@ -1,0 +1,40 @@
+<core:View xmlns:core="sap.ui.core" 
+		xmlns:mvc="sap.ui.core.mvc" 
+		xmlns="sap.m"
+		xmlns:l="sap.ui.layout"
+		controllerName="harry.app.controller.user.UserList" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="用户列表">
+		<content>
+			<l:Grid defaultSpan="L4 M6 S8" class="sapUiSmallMarginTop" content="{usrs>/}">
+				<ObjectListItem
+					title="{usrs>name}"
+					intro="{
+						path: 'usrs>createdDate',
+						type: 'sap.ui.model.type.DateTime',
+						formatOptions: {style: 'short'}
+					}"
+					icon="{usrs>preview}"
+					type="Active"
+					iconDensityAware="false"
+					press="onListItemPress"
+					number="{usrs>userId}">
+					<firstStatus>
+						<ObjectStatus
+							text="{
+								path: 'usrs>state',
+								formatter: '.formatter._usrStateText'
+							}"
+							state="{
+								path: 'usrs>state',
+								formatter: '.formatter._usrState'
+							}"
+							icon="{
+								path: 'usrs>state',
+								formatter: '.formatter._usrStateIcon'
+							}" />
+					</firstStatus>
+				</ObjectListItem>
+			</l:Grid>
+		</content>
+	</Page>
+</core:View>

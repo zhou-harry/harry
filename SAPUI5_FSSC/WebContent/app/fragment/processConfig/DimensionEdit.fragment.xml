@@ -1,0 +1,51 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:tnt="sap.tnt">
+	<Dialog id="newDimension" title="维度编辑" type="Message" 
+		afterClose="cancelSave" draggable="true" resizable="true">
+		<content>
+			<f:Form editable="true">
+				<f:layout>
+					<f:ResponsiveGridLayout 
+						labelSpanXL="4" labelSpanL="2" labelSpanM="3" labelSpanS="12" 
+						emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0"
+						columnsXL="2" columnsL="1" columnsM="1" 
+						adjustLabelSpan="false" singleContainerFullSize="false" />
+				</f:layout>
+				<f:formContainers>
+					<f:FormContainer>
+						<f:formElements>
+							<f:FormElement label="维度KEY">
+								<f:fields>
+									<Input value="{nDms>/key}" />
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="维度名称">
+								<f:fields>
+									<Input value="{nDms>/name}" />
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="服务类型">
+								<f:fields>
+									<Select
+										forceSelection="false"
+										selectedKey="{nDms>/type}">
+										<core:Item key="1" text="流程" />
+										<core:Item key="2" text="任务" />
+									</Select>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
+		</content>
+		<beginButton>
+			<Button text="保存" press="confirmSave" />
+		</beginButton>
+		<endButton>
+			<Button text="取消" press="cancelSave" />
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

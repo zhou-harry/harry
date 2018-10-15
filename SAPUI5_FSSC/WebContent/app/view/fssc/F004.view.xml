@@ -1,0 +1,14 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+		controllerName="harry.app.controller.fssc.F004" xmlns:html="http://www.w3.org/1999/xhtml">
+	
+	<Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
+		<headerToolbar>
+			<Toolbar height="3rem">
+				<Title text="费用报销申请单内容页面..."/>
+			</Toolbar>
+		</headerToolbar>
+		<content>
+			<Text text="Lorem ipsum dolor st amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat" />
+		</content>
+	</Panel>
+</core:View>

@@ -1,0 +1,54 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:tnt="sap.tnt">
+	<Dialog id="definitionEditId" title="流程定义编辑" type="Message"
+		afterClose="cancelDefinitionSave" draggable="true" resizable="true">
+		<content>
+			<f:Form editable="true">
+				<f:layout>
+					<f:ResponsiveGridLayout 
+						labelSpanXL="4" labelSpanL="2" labelSpanM="3" labelSpanS="12" 
+						emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0"
+						columnsXL="2" columnsL="1" columnsM="1" 
+						adjustLabelSpan="false" singleContainerFullSize="false" />
+				</f:layout>
+				<f:formContainers>
+					<f:FormContainer>
+						<f:formElements>
+							<f:FormElement label="流程定义编号" visible="{pdef>/vis}">
+								<f:fields>
+									<Input value="{pdef>/key}" />
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="流程定义名称">
+								<f:fields>
+									<TextArea width="100%" value="{pdef>/name}" placeholder="流程定义名称..." />
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="流程模板">
+								<f:fields>
+									<Select
+										forceSelection="false"
+										selectedKey="{pdef>/deploymentKey}"
+										items="{
+											path: 'deploy>/',
+											sorter: { path: 'key' }
+										}">
+										<core:Item key="{deploy>key}" text="{deploy>deploymentName}" />
+									</Select>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
+		</content>
+		<beginButton>
+			<Button text="保存" press="confirmDefinitionSave" />
+		</beginButton>
+		<endButton>
+			<Button text="取消" press="cancelDefinitionSave" />
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

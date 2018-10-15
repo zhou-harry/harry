@@ -1,0 +1,28 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+		controllerName="harry.app.controller.processConfig.ProcRoleApp" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="审批角色">
+		<headerContent>
+			<Button icon="sap-icon://add-contact" tooltip="添加审批角色" press="handleRoleAdd"/>
+		</headerContent>
+		<content>
+			<List id="roleid" 
+				growing="true" 
+				mode="Delete"
+				delete="handleRoleDelete"
+				items="{path: 'roles>/'}">
+				<StandardListItem 
+					type="DetailAndActive"
+					detailPress="handleRoleEdit"
+					icon="sap-icon://role" 
+					title="{roles>name}" 
+					description="{roles>roleId}"
+					info="{
+						path: 'roles>type',
+						formatter: '.formatter.bpmRoleType'
+					}"
+					counter="{roles>countOwners}"
+					press="handleRolePress" />
+			</List>
+		</content>
+	</Page>
+</core:View>

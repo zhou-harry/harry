@@ -1,0 +1,258 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	xmlns:t="sap.ui.table" controllerName="harry.app.controller.process.ProcStartManager"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Dialog id="diagramSignal" title="{acti>/name}" class="sapUiSizeCompact"
+		afterClose="cancelSignal">
+		<content >
+			<NavContainer id="navCon" height="8em" visible="{
+										path: 'acti>/type',
+										formatter: '.formatter.v_navCon'
+									}">
+				<Page id="p1" showHeader="false">
+					<f:Form id="FormDisplay350" editable="false">
+						<f:layout>
+							<f:ResponsiveGridLayout 
+								labelSpanXL="4"
+								labelSpanL="2" 
+								labelSpanM="2" 
+								labelSpanS="2" 
+								adjustLabelSpan="false"
+								emptySpanXL="0" 
+								emptySpanL="4" 
+								emptySpanM="0" 
+								emptySpanS="0"
+								columnsXL="2" 
+								columnsL="1" 
+								columnsM="1" 
+								singleContainerFullSize="false" />
+						</f:layout>
+						<f:formContainers>
+							<f:FormContainer >
+								<f:formElements>
+									<f:FormElement label="任务编号">
+										<f:fields>
+											<Text text="{acti>/id}" />
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement label="受理人" visible="{
+										path: 'acti>/type',
+										formatter: '.formatter.v_assignee'
+									}">
+										<f:fields>
+											<Text text="{acti>/assignee}" >
+												<layoutData>
+													<l:GridData span="XL2 L4 M3 S3" />
+												</layoutData>
+											</Text>
+										</f:fields>
+										<Link text="指定受理人" press="handleNav" class="sapUiSmallMarginBegin">
+											<customData>
+												<core:CustomData key="target" value="p2" />
+											</customData>
+											<layoutData>
+												<l:GridData span="XL2 L4 M2 S2" />
+											</layoutData>
+										</Link>
+									</f:FormElement>
+									<f:FormElement label="所有权人" visible="{
+										path: 'acti>/type',
+										formatter: '.formatter.v_owner'
+									}">
+										<f:fields>
+											<Text text="{acti>/owner}">
+												<layoutData>
+													<l:GridData span="XL2 L4 M3 S3" />
+												</layoutData>
+											</Text>
+										</f:fields>
+										<Link text="指定所有权人" press="handleNav" class="sapUiSmallMarginBegin">
+											<customData>
+												<core:CustomData key="target" value="p3" />
+											</customData>
+											<layoutData>
+												<l:GridData span="XL2 L4 M3 S3" />
+											</layoutData>
+										</Link>
+									</f:FormElement>
+									<f:FormElement label="创建时间">
+										<f:fields>
+											<Text text="{
+												path: 'acti>/createTime',
+												type: 'sap.ui.model.type.DateTime',
+												formatOptions: {style: 'medium'}
+											}" />
+										</f:fields>
+									</f:FormElement>
+								</f:formElements>
+							</f:FormContainer>
+						</f:formContainers>
+					</f:Form>
+				</Page>
+				<Page id="p2" showHeader="false">
+					<f:Form id="FormDisplay354" editable="true">
+						<f:layout>
+							<f:ResponsiveGridLayout 
+								labelSpanXL="4"
+								labelSpanL="2" 
+								labelSpanM="3" 
+								labelSpanS="3" 
+								adjustLabelSpan="false"
+								emptySpanXL="0" 
+								emptySpanL="4" 
+								emptySpanM="0" 
+								emptySpanS="0"
+								columnsXL="2" 
+								columnsL="1" 
+								columnsM="1" 
+								singleContainerFullSize="false" />
+						</f:layout>
+						<f:formContainers>
+							<f:FormContainer >
+								<f:formElements>
+									<f:FormElement label="新受理人">
+										<f:fields>
+											<Input value="{acti>/newAssignee}">
+												<layoutData>
+													<l:GridData span="XL2 L4 M4 S5" />
+												</layoutData>
+											</Input>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement label="操作">
+										<f:fields>
+											<Link text="返回" press="handleNav">
+											<layoutData>
+												<l:GridData span="XL2 L4 M1 S5" />
+											</layoutData>
+											<customData>
+												<core:CustomData key="target" value="p1" />
+											</customData>
+										</Link>
+										<Link text="确认" press="handleAssignee">
+											<layoutData>
+												<l:GridData span="XL2 L4 M1 S5" />
+											</layoutData>
+											<customData>
+												<core:CustomData key="target" value="p1" />
+											</customData>
+										</Link>
+										</f:fields>
+									</f:FormElement>
+								</f:formElements>
+							</f:FormContainer>
+						</f:formContainers>
+					</f:Form>
+				</Page>
+				<Page id="p3" showHeader="false">
+					<f:Form id="FormDisplay352" editable="true">
+						<f:layout>
+							<f:ResponsiveGridLayout 
+								labelSpanXL="4"
+								labelSpanL="2" 
+								labelSpanM="3" 
+								labelSpanS="3" 
+								adjustLabelSpan="false"
+								emptySpanXL="0" 
+								emptySpanL="4" 
+								emptySpanM="0" 
+								emptySpanS="0"
+								columnsXL="2" 
+								columnsL="1" 
+								columnsM="1" 
+								singleContainerFullSize="false" />
+						</f:layout>
+						<f:formContainers>
+							<f:FormContainer >
+								<f:formElements>
+									<f:FormElement label="Pending">
+										<f:fields>
+											<Switch state="{acti>/pending}" tooltip="Pending开启状态,当受委托人完成此任务后, 此任务将发送回所有权人手中">
+											</Switch>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement label="所有权人">
+										<f:fields>
+											<Input value="{acti>/newOwner}">
+												<layoutData>
+													<l:GridData span="XL2 L4 M4 S5" />
+												</layoutData>
+											</Input>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement label="操作">
+										<f:fields>
+											<Link text="返回" press="handleNav">
+												<layoutData>
+													<l:GridData span="XL2 L4 M1 S1" />
+												</layoutData>
+												<customData>
+													<core:CustomData key="target" value="p1" />
+												</customData>
+											</Link>
+											<Link text="确认" press="handleOwner">
+												<layoutData>
+													<l:GridData span="XL2 L4 M1 S1" />
+												</layoutData>
+												<customData>
+													<core:CustomData key="target" value="p1" />
+												</customData>
+											</Link>
+										</f:fields>
+									</f:FormElement>
+								</f:formElements>
+							</f:FormContainer>
+						</f:formContainers>
+					</f:Form>
+				</Page>
+			</NavContainer>
+			<TextArea id="commentid" width="100%" placeholder="comment..." value="{acti>/comment}" visible="{
+										path: 'acti>/type',
+										formatter: '.formatter.v_navCon'
+									}" />
+			<t:Table rows="{vars>/}" selectionMode="None" visibleRowCount="5" alternateRowColors="true">
+					<t:toolbar>
+						<Toolbar height="2.5rem">
+							<content>
+								<Title text="流程自定义参数" />
+								<ToolbarSpacer />
+								<Button icon="sap-icon://add" tooltip="添加参数" press="onAddVar"/>
+							</content>
+						</Toolbar>
+					</t:toolbar>
+					<t:columns>
+						<t:Column>
+							<Label text="Key" />
+							<t:template>
+								<Input value="{vars>_key}"/>
+							</t:template>
+						</t:Column>
+						<t:Column >
+							<Label text="Value" />
+							<t:template>
+								<Input value="{vars>_value}"/>
+							</t:template>
+						</t:Column>
+						<t:Column width="5%">
+							<t:template>
+								<Button icon="sap-icon://delete" tooltip="删除参数" press="onDelVar" />
+							</t:template>
+						</t:Column>
+					</t:columns>
+				</t:Table>
+		</content>
+		<buttons>
+			<Button text="执行" icon="sap-icon://accept" press="confirmSignal" visible="{= ${acti>/type} === 'receiveTask' ? true : false }"/>
+			<Button text="通过" type="Accept" icon="sap-icon://accept" press="confirmTask" visible="{
+							path: 'acti>/type',
+							formatter: '.formatter.v_b_task'
+						}"/>
+			<Button text="驳回" type="Reject" icon="sap-icon://decline" press="rejectTask" visible="{
+							path: 'acti>/type',
+							formatter: '.formatter.v_b_task'
+						}"/>
+			<Button text="已阅" icon="sap-icon://accept" press="confirmCopyTask" visible="{= ${acti>/type} === 'copyTask' ? true : false }"/>
+			<Button text="关闭" press="cancelSignal" />
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

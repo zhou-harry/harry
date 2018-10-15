@@ -1,0 +1,75 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core"
+	xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout"
+	controllerName="harry.app.controller.process.ProcStartManager">
+	<ViewSettingsDialog
+		confirm="handleProcessQuery"
+		cancel="handleProcessCancel"
+		resetFilters="handleProcessReset">
+		<filterItems>
+			<ViewSettingsFilterItem text="流程模板" key="processDefinitionId" multiSelect="false" items="{deployment>/}">
+				<items>
+					<ViewSettingsItem text="{deployment>deploymentName}" key="{deployment>id}" />
+				</items>
+			</ViewSettingsFilterItem>
+			<ViewSettingsCustomItem text="流程实例" key="process">
+				<customControl>
+				<f:Form id="processFormId" editable="true">
+					<f:layout>
+						<f:ResponsiveGridLayout
+							labelSpanXL="4"
+							labelSpanL="3"
+							labelSpanM="4"
+							labelSpanS="12"
+							adjustLabelSpan="false"
+							emptySpanXL="0"
+							emptySpanL="4"
+							emptySpanM="0"
+							emptySpanS="0"
+							columnsXL="2"
+							columnsL="1"
+							columnsM="1"
+							singleContainerFullSize="false" />
+					</f:layout>
+					<f:formContainers>
+						<f:FormContainer>
+							<f:formElements>
+								<f:FormElement label="流程号">
+									<f:fields>
+										<MaskInput id="instanceId" value="{processForm>/instanceId}" mask = "~~~~~~~" placeholderSymbol = "_" placeholder = "输入流程号">
+											<rules>
+												<MaskInputRule maskFormatSymbol = "~" regex = "[^_]"/>
+											</rules>
+										</MaskInput>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="业务单号">
+									<f:fields>
+										<Input id="businessKey" value="{processForm>/businessKey}" type="Text" placeholder="业务单号" />
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement label="流程名称">
+									<f:fields>
+										<Input id="name" type="Text" value="{processForm>/name}" placeholder="流程名称" class="sapUiSmallMarginBottom"/>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+					</f:formContainers>
+				</f:Form>
+				</customControl>
+			</ViewSettingsCustomItem>
+		</filterItems>
+		<sortItems>
+			<ViewSettingsItem text="流程号" key="instanceId" />
+			<ViewSettingsItem text="流程描述" key="description" />
+			<ViewSettingsItem text="创建时间" key="startTime"/>
+			<ViewSettingsItem text="完成时间" key="endTime" selected="true" />
+		</sortItems>
+		<groupItems>
+			<ViewSettingsItem text="流程类型" key="processName" />
+			<ViewSettingsItem text="流程状态" key="isEnded" />
+		</groupItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

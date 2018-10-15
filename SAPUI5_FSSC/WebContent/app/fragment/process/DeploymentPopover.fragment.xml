@@ -1,0 +1,21 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:tnt="sap.tnt">
+	<Dialog id="newDeployment" title="部署流程引擎" type="Message" class="sapUiSizeCompact"
+		afterClose="cancelDeploy" draggable="true" resizable="true">
+		<content>
+			<HBox class="sapUiSmallMarginBegin">
+					<Label id="deployType" text="{nDeploy>/type}" visible="false" />
+					<Label text="流程类型：" labelFor="input-b" design="Bold"/>
+					<Text id="input-b" text="{nDeploy>/name}"/>
+			</HBox>
+			<TextArea id="deployDesc" width="100%" placeholder="流程模板描述..."></TextArea>
+		</content>
+		<beginButton press="onCloseDialog">
+			<Button text="部署新版本" press="confirmDeploy" />
+		</beginButton>
+		<endButton press="onCloseDialog">
+			<Button text="取消" press="cancelDeploy" />
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

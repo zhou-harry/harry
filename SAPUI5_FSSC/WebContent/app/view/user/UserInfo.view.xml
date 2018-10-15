@@ -1,0 +1,142 @@
+<core:View xmlns:core="sap.ui.core" 
+		xmlns:mvc="sap.ui.core.mvc" 
+		xmlns="sap.m"
+		xmlns:l="sap.ui.layout"
+		xmlns:f="sap.f"
+		controllerName="harry.app.controller.user.UserInfo" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="用户详细信息" showNavButton="true" navButtonPress="onDisplayBack">
+		<content>
+			<l:BlockLayout id="BlockLayout" background="Dashboard">
+					<l:BlockLayoutRow>
+						<l:BlockLayoutCell title="{target>/data/name}">
+							<FlexBox direction="Column" justifyContent="Center">
+								<items>
+									<f:Avatar id="preview" src="{target>/data/preview}" displaySize="XL"/>
+									<List width="100%">
+										<items>
+											<CustomListItem class="sapUiSmallMarginBottom">
+												<RatingIndicator id="RI_XS" maxValue="5" value="4" tooltip="信用级别评分" iconSize="22px" displayOnly="true"/>
+											</CustomListItem>
+											<CustomListItem class="sapUiSmallMarginBottom">
+												<HBox>
+													<VBox width="30%">
+														<Label text="账号：" labelFor="userId" design="Bold"/>
+													</VBox>
+													<VBox>
+														<Text id="userId" text="{target>/data/userId}"/>
+													</VBox>
+												</HBox>
+											</CustomListItem>
+											<CustomListItem class="sapUiSmallMarginBottom">
+												<HBox>
+													<VBox width="30%">
+														<Label text="公司：" labelFor="company" design="Bold"/>
+													</VBox>
+													<VBox>
+														<Text id="company" text="{target>/data/company}" />
+													</VBox>
+												</HBox>
+											</CustomListItem>
+											<CustomListItem class="sapUiSmallMarginBottom">
+												<HBox>
+													<VBox width="30%">
+														<Label text="电话：" labelFor="phone" design="Bold"/>
+													</VBox>
+													<VBox>
+														<Text id="phone" text="{target>/data/phone}" />
+													</VBox>
+												</HBox>
+											</CustomListItem>
+											<CustomListItem class="sapUiSmallMarginBottom">
+												<HBox>
+													<VBox width="30%">
+														<Label text="邮箱：" labelFor="email" design="Bold"/>
+													</VBox>
+													<VBox>
+														<Text id="email" text="{target>/data/email}" />
+													</VBox>
+												</HBox>
+											</CustomListItem>
+											<CustomListItem class="sapUiSmallMarginBottom">
+												<HBox>
+													<ObjectStatus
+														text="{
+															path: 'target>/data/state',
+															formatter: '.formatter._usrStateText'
+														}"
+														state="{
+															path: 'target>/data/state',
+															formatter: '.formatter._usrState'
+														}"
+														icon="{
+															path: 'target>/data/state',
+															formatter: '.formatter._usrStateIcon'
+														}" />
+												</HBox>
+											</CustomListItem>
+											<CustomListItem visible="{target>/edit}">
+												<Button text="编辑用户" press="onEditUser" width="100%" icon="sap-icon://edit"/>
+											</CustomListItem>
+										</items>
+									</List>
+								</items>
+							</FlexBox>
+						</l:BlockLayoutCell>
+						<l:BlockLayoutCell title="菜单权限" width="2">
+							<Table id="idRolesTable"
+								inset="false"
+								noDataText="未分配菜单权限..."
+								items="{
+									path: 'roles>/',
+									sorter: {
+										path: 'created'
+									}
+								}">
+								<columns>
+									<Column minScreenWidth="Tablet" demandPopin="true">
+										<Text text="角色名称" />
+									</Column>
+									<Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
+										<Text text="系统角色" />
+									</Column>
+									<Column>
+										<Text text="角色编号" />
+									</Column>
+								</columns>
+								<items>
+									<ColumnListItem>
+										<cells>
+											<ObjectStatus text="{roles>name}" state="{= ${roles>status}?'Success':'Error'}" />
+											<Text text="{= ${roles>isSys}?'是':'否'}" />
+											<Text text="{roles>roleId}" />
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</l:BlockLayoutCell>
+					</l:BlockLayoutRow>
+			</l:BlockLayout>
+			<Panel expandable="true" expanded="false" headerText="近期活动" width="auto" class="sapUiResponsiveMargin">
+				<headerToolbar>
+					<Toolbar height="3rem">
+						<ToolbarSpacer />
+						<Button text="更多活动明细" icon="sap-icon://drop-down-list" press="initAll"/>
+					</Toolbar>
+				</headerToolbar>
+				<content>
+					<List id="activities" class="sapUiSmallMargin" noDataText="近期无活动..."
+						growing="true" growingThreshold="10" growingScrollToLoad="true"
+						items="{recent>/}">
+						<items>
+							<StandardListItem
+								title="{recent>name}"
+								info="{path:'recent>date',type: 'sap.ui.model.type.DateTime',formatOptions: {style: 'short'}}"
+								infoState="Success"
+								 />
+						</items>
+					</List>
+				</content>
+			</Panel>
+		</content>
+	</Page>
+</core:View>

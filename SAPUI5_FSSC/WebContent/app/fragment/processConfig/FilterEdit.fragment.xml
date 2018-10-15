@@ -1,0 +1,84 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:tnt="sap.tnt">
+	<Dialog id="filterEditId" title="规则过滤器编辑" type="Message"
+		afterClose="cancelFilterSave" draggable="true" resizable="true">
+		<content>
+			<f:Form editable="true">
+				<f:layout>
+					<f:ResponsiveGridLayout 
+						labelSpanXL="4" labelSpanL="2" labelSpanM="3" labelSpanS="12" 
+						emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0"
+						columnsXL="2" columnsL="1" columnsM="1" 
+						adjustLabelSpan="false" singleContainerFullSize="false" />
+				</f:layout>
+				<f:formContainers>
+					<f:FormContainer>
+						<f:formElements>
+							<f:FormElement label="规则名称">
+								<f:fields>
+									<Input value="{fEdit>/name}" />
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="规则类型">
+								<f:fields>
+									<Select forceSelection="false"  selectedKey="{fEdit>/type}">
+										<core:Item key="1" text="默认" />
+										<core:Item key="2" text="自定义" />
+										<core:Item key="3" text="引用" />
+									</Select>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+					<f:FormContainer title="引用信息" 
+						visible="{
+							path: 'fEdit>/type',
+							formatter: '.formatter.v_filterType_3'
+						}">
+						<f:formElements>
+							<f:FormElement label="主引用">
+								<f:fields>
+									<Select forceSelection="false" selectedKey="{fEdit>/master}"
+										items="{
+											path: 'fSection>/',
+											sorter: { path: 'key' }
+										}">
+										<core:Item key="{fSection>filterId}" text="{fSection>name}" />
+									</Select>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="副引用">
+								<f:fields>
+									<Select forceSelection="false"  selectedKey="{fEdit>/slave}"
+										items="{
+											path: 'fSection>/',
+											sorter: { path: 'key' }
+										}">
+										<core:Item key="{fSection>filterId}" text="{fSection>name}" />
+									</Select>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="引用关系">
+								<f:fields>
+									<Select forceSelection="false"  selectedKey="{fEdit>/relation}">
+										<core:Item key="1" text="交集" />
+										<core:Item key="2" text="并集" />
+										<core:Item key="3" text="排斥" />
+									</Select>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
+		</content>
+		<beginButton>
+			<Button text="保存" press="confirmFilterSave" />
+		</beginButton>
+		<endButton>
+			<Button text="取消" press="cancelFilterSave" />
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

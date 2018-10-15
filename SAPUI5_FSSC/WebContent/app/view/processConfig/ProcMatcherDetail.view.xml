@@ -1,0 +1,54 @@
+<core:View xmlns:core="sap.ui.core" 
+		xmlns:mvc="sap.ui.core.mvc" 
+		xmlns="sap.m"
+		xmlns:u="sap.uxap"
+		controllerName="harry.app.controller.processConfig.ProcMatcher" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="定制表单流程匹配器" showNavButton="true" navButtonPress="navBack">
+		<content>
+			<u:ObjectPageLayout id="ObjectPageLayout" 
+				enableLazyLoading="false" 
+				useIconTabBar="true" 
+				showTitleInHeaderContent="false">
+				<u:headerTitle>
+					<u:ObjectPageHeader objectTitle="{form>/formName}"
+									objectSubtitle="{form>/key}"
+									objectImageShape="Circle"
+									objectImageURI="sap-icon://form"
+									isActionAreaAlwaysVisible="true">
+					<u:sideContentButton>
+						<Button icon="sap-icon://add" text="添加" toolTip="添加流程匹配器" press="handleMatcherAdd"/>
+					</u:sideContentButton>
+					</u:ObjectPageHeader>
+				</u:headerTitle>
+				<u:headerContent>
+					<VBox>
+						<ObjectAttribute title="流程类型" text="【{form>/typeName}】"/>
+						<ObjectAttribute title="流程模板" text="【{form>/deployName}】"/>
+					</VBox>
+				</u:headerContent>
+				<u:sections>
+					<u:ObjectPageSection id="matchid" >
+						<u:subSections>
+							<u:ObjectPageSubSection title="">
+								<u:blocks>
+									<List id="matchersid" items="{matchers>/}" mode="Delete" delete="handleMatcherDelete">
+										<items>
+											<ObjectListItem
+												icon="sap-icon://process"
+												title="{matchers>NAME_}"
+												templateShareable="true"
+												intro="{matchers>PROC_KEY}"
+												attributes="{matchers>items/}">
+												<ObjectAttribute title="{matchers>NAME_}" text="{matchers>MATCHER}" />
+											</ObjectListItem>
+										</items>
+									</List>
+								</u:blocks>
+							</u:ObjectPageSubSection>
+						</u:subSections>
+					</u:ObjectPageSection>
+				</u:sections>
+			</u:ObjectPageLayout>
+		</content>
+	</Page>
+</core:View>

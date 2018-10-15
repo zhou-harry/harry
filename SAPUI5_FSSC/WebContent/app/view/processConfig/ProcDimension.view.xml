@@ -1,0 +1,27 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+		controllerName="harry.app.controller.processConfig.ProcDimension" xmlns:html="http://www.w3.org/1999/xhtml">
+	<List
+		id="list"
+		mode="Delete"
+		delete="handleDelete"
+		enableBusyIndicator="true"
+		growing="true"
+		items="{path: 'dimension>/'}" >
+		<headerToolbar>
+			<Toolbar>
+				<Title text="流程维度" level="H2" />
+				<ToolbarSpacer />
+				<Button text="添加" icon="sap-icon://add" press="handleAdd" />
+			</Toolbar>
+		</headerToolbar>
+		<StandardListItem
+			type="Detail"
+			detailPress="handleEditPress" 
+			icon="sap-icon://blank-tag"
+			title="[{dimension>key}]{dimension>name}"
+			description="{
+							path: 'dimension>type',
+							formatter: '.formatter.dimensionType'
+						}"/>
+	</List>
+</core:View>

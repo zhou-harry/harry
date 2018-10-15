@@ -1,0 +1,18 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" controllerName="harry.app.controller.processConfig.ProcMatcher"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="系统业务表单" showHeader="true">
+		<content>
+			<List id="formid" 
+				growing="true" 
+				items="{path: 'forms>/'}">
+				<StandardListItem type="Active" 
+					icon="sap-icon://form" 
+					title="{forms>title}" 
+					description="{forms>key}"
+					counter="{forms>matches}"
+					press="handleFormPress" />
+			</List>
+		</content>
+	</Page>
+</core:View>

@@ -1,0 +1,15 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+		controllerName="harry.app.controller.fssc.F003" xmlns:html="http://www.w3.org/1999/xhtml">
+	
+	<Panel>
+		<headerToolbar>
+			<Toolbar height="3rem">
+				<Title text="{meta>/description}"/>
+			</Toolbar>
+		</headerToolbar>
+		<content>
+			<Text text="借款还款申请单内容页面..."/>
+		</content>
+	</Panel>
+	
+</core:View>

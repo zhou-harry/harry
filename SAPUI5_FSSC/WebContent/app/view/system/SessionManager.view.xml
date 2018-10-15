@@ -1,0 +1,81 @@
+<core:View xmlns:core="sap.ui.core" 
+		xmlns:mvc="sap.ui.core.mvc" 
+		xmlns="sap.m"
+		xmlns:l="sap.ui.layout"
+		xmlns:t="sap.ui.table"
+		controllerName="harry.app.controller.system.SessionManager" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="系统会话管理" showNavButton="true" navButtonPress="onDisplayBack">
+		<content>
+			<t:Table id="sessionsid"
+				class="sapUiSmallMargin"
+				selectionMode="None"
+				rows="{sessions>/}"
+				visibleRowCount="{=${sessions>/}.length}"
+				enableCellFilter="{ui>/cellFilterOn}"
+				filter="filterPrice"
+				ariaLabelledBy="title"
+				rowActionCount="1">
+				<t:rowSettingsTemplate>
+					<t:RowSettings highlight="{= ${sessions>active}?'Success':'Error'}" />
+				</t:rowSettingsTemplate>
+				<t:rowActionTemplate>
+					<t:RowAction>
+						<t:RowActionItem icon="sap-icon://log" text= "注销" press="sessionOutPress" />
+					</t:RowAction>
+				</t:rowActionTemplate>
+				<t:toolbar>
+					<Toolbar>
+						<Title id="title" text="在线用户({=${sessions>/}.length})" />
+						<ToolbarSpacer/>
+						<Button
+							icon="sap-icon://synchronize"
+							text="刷新"
+							tooltip="刷新"
+							press="refresh"/>
+					</Toolbar>
+				</t:toolbar>
+				<t:columns>
+					<t:Column width="20%" resizable="false"
+						filterProperty="name" defaultFilterOperator="StartsWith">
+						<Label text="用户" />
+						<t:template>
+							<ObjectIdentifier title="{sessions>name}"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="30%" resizable="false">
+						<Label text="会话Id" />
+						<t:template>
+							<Text text="{sessions>id}"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="15%" resizable="false">
+						<Label text="登录主机" />
+						<t:template>
+							<Text text="{sessions>host}"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="15%" resizable="false">
+						<Label text="登录时间" />
+						<t:template>
+							<Text text="{
+								path: 'sessions>start',
+								type: 'sap.ui.model.type.DateTime',
+								formatOptions: {style: 'short'}
+							}"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="15%" resizable="false">
+						<Label text="最后访问时间" />
+						<t:template>
+							<Text text="{
+								path: 'sessions>lastAccess',
+								type: 'sap.ui.model.type.DateTime',
+								formatOptions: {style: 'short'}
+							}"/>
+						</t:template>
+					</t:Column>
+				</t:columns>
+			</t:Table>
+		</content>
+	</Page>
+</core:View>

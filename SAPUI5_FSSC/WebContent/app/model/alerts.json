@@ -1,0 +1,63 @@
+{
+	"alerts": {
+		"notifications": [
+			{
+				"title": "New Order",
+				"description": "John Max has ordered Laptop",
+				"date": "1 hour ago",
+				"priority": "High",
+				"icon": "sap-icon://clinical-order",
+				"buttons":{
+					"accept":false,
+					"reject":false
+				}
+			},
+			{
+				"title": "Canceled Order",
+				"description": "Sara Rok has canceled her order",
+				"date": "5 hour ago",
+				"priority": "Medium",
+				"icon": "sap-icon://sys-cancel-2",
+				"buttons":{
+					"accept":true,
+					"reject":false
+				}
+			},
+			{
+				"title": "Delivery",
+				"description": "Order 112 has delivered to nancy klaus",
+				"date": "2 day ago",
+				"priority": "Low",
+				"icon": "sap-icon://message-success",
+				"buttons":{
+					"accept":true,
+					"reject":true
+				}
+			}
+		],
+		"list": [
+			{
+			"type":"Error",
+				"title": "Password Error",
+				"subTitle": "invalid password",
+				"description": "User S700 exceeded number of tries to enter password",
+				"counter": 5
+			},
+			{
+			"type":"Error",
+				"title": "登录异常",
+				"subTitle": "Example of subtitle",
+				"description": "Second Error message description",
+				"counter": 1
+			}
+			,
+			{
+			"type":"Success",
+				"title": "登录成功",
+				"subTitle": "Example of subtitle",
+				"description": "Second Error message description",
+				"counter": 1
+			}
+		]
+	}
+}

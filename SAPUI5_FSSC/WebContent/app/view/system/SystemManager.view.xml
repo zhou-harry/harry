@@ -1,0 +1,16 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+		controllerName="harry.app.controller.system.SystemManager" xmlns:html="http://www.w3.org/1999/xhtml">
+	<TileContainer
+		id="systemContainer"
+		tileAdd="handleTileAdded"
+		tiles="{monitor>/}">
+		<StandardTile
+			icon="{monitor>icon}"
+			number="{monitor>number}"
+			numberUnit="{monitor>unit}"
+			title="{monitor>title}"
+			info="{monitor>info}"
+			infoState="{monitor>infoState}" 
+			press="showMonitor" />
+	</TileContainer>
+</core:View>

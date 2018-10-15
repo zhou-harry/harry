@@ -1,0 +1,100 @@
+<mvc:View height="100%"
+	controllerName="harry.app.controller.Main"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:tnt="sap.tnt">
+	<tnt:ToolPage id="app" >
+		<tnt:header>
+			<tnt:ToolHeader>
+				<Button
+					id="sideNavigationToggleButton"
+					icon="sap-icon://menu2"
+					type="Transparent"
+					press="onSideNavButtonPress"
+					tooltip="{i18n>navigationToggleButtonTooltip}">
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow"/>
+					</layoutData>
+				</Button>
+				<Title text="{i18n>appTitle}"/>
+				<ToolbarSpacer/>
+				<Button
+					id="errorButton"
+					icon="sap-icon://message-popup"
+					visible="{= ${alerts>/alerts/errors}.length === 0 ? false : true }"
+					type="Transparent"
+					press="onMessagePopoverPress"
+					tooltip="{i18n>errorButtonTooltip}">
+					<layoutData>
+						<OverflowToolbarLayoutData closeOverflowOnInteraction="false"/>
+					</layoutData>
+				</Button>
+				<f:Avatar src="{user>/preview}" displaySize="XS" press="onUserNamePress" />
+				<Button
+					id="userButton"
+					text="{user>/name}"
+					type="Transparent"
+					press="onUserNamePress"
+					visible="{=!${device>/system/phone}}">
+					<layoutData>
+						<OverflowToolbarLayoutData closeOverflowOnInteraction="false"/>
+					</layoutData>
+				</Button>
+			</tnt:ToolHeader>
+		</tnt:header>
+		<tnt:sideContent>
+			<tnt:SideNavigation
+				expanded="true"
+				itemSelect="onItemSelect">
+				<tnt:NavigationList
+					items="{
+						path: 'side>/navigation',
+						templateShareable: true
+					}">
+					<tnt:NavigationListItem
+						text="{side>title}"
+						icon="{side>icon}"
+						expanded="{side>expanded}"
+						items="{
+							path: 'side>items',
+							templateShareable: true
+						}"
+						key="{side>key}#{side>valid}#{side>sideExpanded}">
+						<tnt:NavigationListItem
+							text="{side>title}"
+							icon="{side>icon}"
+							expanded="{side>expanded}"
+							items="{
+								path: 'side>items',
+								templateShareable: true
+							}"
+							key="{side>key}#{side>valid}#{side>sideExpanded}">
+							<tnt:NavigationListItem
+								text="{side>title}"
+								icon="{side>icon}"
+								key="{side>key}#{side>valid}#{side>sideExpanded}" >
+							</tnt:NavigationListItem>
+						</tnt:NavigationListItem>
+					</tnt:NavigationListItem>
+				</tnt:NavigationList>
+				<tnt:fixedItem>
+					<tnt:NavigationList
+						items="{
+							path: 'side>/fixedNavigation',
+							templateShareable: false
+						}">
+						<tnt:NavigationListItem
+							text="{side>title}"
+							icon="{side>icon}"
+							key="{side>key}#{side>valid}#{side>sideExpanded}">
+						</tnt:NavigationListItem>
+					</tnt:NavigationList>
+				</tnt:fixedItem>
+			</tnt:SideNavigation>
+		</tnt:sideContent>
+		<tnt:mainContents>
+			<App id="rootControl"/>
+		</tnt:mainContents>
+	</tnt:ToolPage>
+</mvc:View>

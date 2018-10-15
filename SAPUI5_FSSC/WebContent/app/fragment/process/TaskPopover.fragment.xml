@@ -1,0 +1,46 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core">
+	<ResponsivePopover title="{comment>/processName}" placement="Bottom" >
+		<content>
+			<l:BlockLayout background="Dashboard" visible="{=${comment>/active}}">
+				<l:BlockLayoutRow>
+					<l:BlockLayoutCell title="审批意见：">
+						<RadioButtonGroup id="rGroupid" columns="4" selectedIndex="{comment>/status}" class="sapUiTinyMarginBottom">
+							<buttons>
+								<RadioButton id="RB-1" text="同意" valueState="Success" />
+								<RadioButton id="RB-2" text="驳回" valueState="Error" />
+								<RadioButton id="RB-3" text="加签" valueState="None" enabled="false"/>
+								<RadioButton id="RB-4" text="补单" valueState="Warning" enabled="false"/>
+							</buttons>
+						</RadioButtonGroup>
+						<FeedInput 
+							value="{comment>/value}"
+							icon="{comment>/preview}" 
+							iconDensityAware="false" 
+							post="onTaskPost" 
+							placeholder="审批意见..." 
+							class="sapUiTinyMarginBottom" />
+					</l:BlockLayoutCell>
+				</l:BlockLayoutRow>
+			</l:BlockLayout>
+	
+			<List id="taskid" headerText="审批历史" items="{path:'tasks>/'}">
+				<FeedListItem 
+					highlight="{
+								path: 'tasks>deleteReason',
+								formatter: '.formatter.taskHighlight'
+							}"
+					icon="{tasks>preview}"
+					sender="{tasks>assignee}"
+					text="{tasks>comment}"
+					info="{tasks>name}{tasks>description} ▪ {tasks>reasonText}"
+					timestamp="{path: 'tasks>endTime',type: 'sap.ui.model.type.DateTime',formatOptions: {relative: true,relativeScale: 'auto'}}" 
+					iconDensityAware="false" 
+					iconPress="onIconPress" >
+				</FeedListItem>
+			</List>
+		</content>
+	</ResponsivePopover>
+</core:FragmentDefinition>

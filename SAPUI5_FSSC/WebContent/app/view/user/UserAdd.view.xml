@@ -1,0 +1,194 @@
+<core:View xmlns:core="sap.ui.core" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f1="sap.f"
+	xmlns:u="sap.ui.unified"
+	xmlns:f="sap.ui.layout.form"
+	controllerName="harry.app.controller.user.UserAdd" xmlns:html="http://www.w3.org/1999/xhtml">
+	
+	<Page title="用户编辑" showNavButton="true" navButtonPress="onDisplayBack">
+		<headerContent>
+			<Toolbar>
+				<ToolbarSpacer />
+				<Button icon="sap-icon://accept" text="确认" press="onPressSave"/>
+				<Button icon="sap-icon://decline" text="取消" press="onPressCancel"/>
+			</Toolbar>
+		</headerContent>
+		<content>
+			<l:BlockLayout id="BlockLayout" background="Dashboard">
+					<l:BlockLayoutRow>
+						<l:BlockLayoutCell>
+							<VBox alignItems="Center" class="sapUiSmallMarginTop">
+								<layoutData>
+									<l:GridData span="L3 M3 S8"
+										linebreakL="true"
+										linebreakM="true"
+										linebreakS="true" />
+								</layoutData>
+								<f1:Avatar id="preview" src="{usr>/preview}" displaySize="XL" class="sapUiSmallMarginTop"/>
+								<Text text="Upload a different photo..." class="sapUiSmallMarginTop" />
+								<u:FileUploader id="photoid" name="PHOTO"
+									uploadUrl="{f>/path}"
+									tooltip="Upload your file to the server"
+									fileType="png,jpg,gif,bmp"
+									maximumFilenameLength="55"
+									maximumFileSize="5"
+									uploadOnChange="true"
+									change="handleFileChange"
+									typeMissmatch="handleTypeMissmatch"
+									fileSizeExceed="handleSizeExceed"
+									uploadComplete="handleUploadComplete">
+										<u:parameters>
+											<u:FileUploaderParameter name="fileid" value="{d>/fid}"/>
+										</u:parameters>
+								</u:FileUploader>
+							</VBox>
+						</l:BlockLayoutCell>
+						<l:BlockLayoutCell width="3">
+							<f:Form editable="true">
+								<f:layout>
+									<f:ResponsiveGridLayout adjustLabelSpan="false" singleContainerFullSize="false" 
+										labelSpanXL="4" labelSpanL="2" labelSpanM="3" labelSpanS="12" 
+										emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0"
+										columnsXL="2" columnsL="1" columnsM="1" />
+								</f:layout>
+								<f:formContainers>
+									<f:FormContainer >
+										<f:formElements>
+											<f:FormElement>
+												<f:label>
+													<Label text="登录账号" labelFor="userId" design="Bold" />
+												</f:label>
+												<f:fields>
+													<Input id="userId" required="true" placeholder="员工号 ..."
+														liveChange="handleUseridChange"
+														value="{path : 'usr>/userId',type : 'sap.ui.model.type.String',constraints : {minLength: 1,maxLength: 20}}">
+														<layoutData>
+															<l:GridData span="XL2 L5 M5 S5" />
+														</layoutData>
+													</Input>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement>
+												<f:label>
+													<Label text="密码" labelFor="password" design="Bold" />
+												</f:label>
+												<f:fields>
+													<Input id="password" type="Password" required="true" placeholder="登录密码 ..."
+													value="{path : 'usr>/password',type : 'sap.ui.model.type.String',constraints : {minLength: 1,maxLength: 15}}">
+														<layoutData>
+															<l:GridData span="XL2 L5 M5 S5" />
+														</layoutData>
+													</Input>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement>
+												<f:label>
+													<Label text="确认密码" labelFor="password2" design="Bold" />
+												</f:label>
+												<f:fields>
+													<Input id="password2" type="Password" required="true" placeholder="确认密码 ..." 
+														value="{path : 'usr>/password2',type : 'sap.ui.model.type.String',constraints : {minLength: 1,maxLength: 15}}">
+														<layoutData>
+															<l:GridData span="XL2 L5 M5 S5" />
+														</layoutData>
+													</Input>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement>
+												<f:label>
+													<Label text="名称" labelFor="name" design="Bold" />
+												</f:label>
+												<f:fields>
+													<Input id="name" required="true" placeholder="名称 ..."
+														value="{path : 'usr>/name',type : 'sap.ui.model.type.String',constraints : {minLength: 1,maxLength: 50}}">
+														<layoutData>
+															<l:GridData span="XL2 L5 M5 S5" />
+														</layoutData>
+													</Input>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement>
+												<f:label>
+													<Label text="电话" labelFor="phone" design="Bold" />
+												</f:label>
+												<f:fields>
+													<Input id="phone" placeholder="手机号 ..."
+														valueStateText="请正确输入联系电话."
+														value="{path : 'usr>/phone',type : 'sap.ui.model.type.String',constraints : {minLength: 1,maxLength: 51}}">
+														<layoutData>
+															<l:GridData span="XL2 L5 M5 S5" />
+														</layoutData>
+													</Input>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement>
+												<f:label>
+													<Label text="邮箱" labelFor="email" design="Bold" />
+												</f:label>
+												<f:fields>
+													<Input	id="email" type="Email" placeholder="Enter E-Mail ..."
+													valueStateText="请录入有效的邮箱地址.."
+													value="{
+														path : 'usr>/email',
+														type : '.customEMailType'
+													}" >
+														<layoutData>
+															<l:GridData span="XL2 L5 M5 S5" />
+														</layoutData>
+													</Input>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement>
+												<f:label>
+													<Label text="公司" labelFor="company" design="Bold" />
+												</f:label>
+												<f:fields>
+													<Input id="company" value="{usr>/company}" placeholder="所属公司 ...">
+														<layoutData>
+															<l:GridData span="XL2 L4 M5 S5" />
+														</layoutData>
+													</Input>
+												</f:fields>
+											</f:FormElement>
+											<f:FormElement>
+												<f:label>
+													<Label text="" design="Bold" />
+												</f:label>
+												<f:fields>
+													<RadioButtonGroup id="status" columns="5" selectedIndex="{usr>/state}">
+														<buttons>
+															<RadioButton id="RB1" text="未激活" valueState="Error"/>
+															<RadioButton id="RB2" text="有效" valueState="Success"/>
+															<RadioButton id="RB3" text="锁定" valueState="Warning"/>
+														</buttons>
+													</RadioButtonGroup>
+												</f:fields>
+											</f:FormElement>
+										</f:formElements>
+									</f:FormContainer>
+								</f:formContainers>
+							</f:Form>
+						</l:BlockLayoutCell>
+					</l:BlockLayoutRow>
+					<l:BlockLayoutRow>
+						<l:BlockLayoutCell >
+							<OverflowToolbar id="otb1">
+								<Title text="菜单权限" level="H5" titleStyle="H5" />
+								<ToolbarSpacer/>
+								<Button text="添加" icon="sap-icon://add" press="onAddRoles" />
+							</OverflowToolbar>
+							<Tokenizer id="rtokens" width="100%" tokenChange="onTokenChange"
+								tokens="{
+									path: 'roles>/',
+									sorter: { path: 'name' }
+								}">
+								<Token key="{roles>roleId}" text="{roles>name}" editable="{roles>editable}" delete="onRemoveRole"/>
+							</Tokenizer>
+						</l:BlockLayoutCell>
+					</l:BlockLayoutRow>
+			</l:BlockLayout>
+		</content>
+	</Page>
+</core:View>

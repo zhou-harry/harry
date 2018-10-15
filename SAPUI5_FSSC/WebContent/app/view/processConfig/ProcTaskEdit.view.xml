@@ -1,0 +1,133 @@
+<core:View xmlns:core="sap.ui.core" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form"
+	controllerName="harry.app.controller.processConfig.ProcTaskEdit" 
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="审批节点编辑" showNavButton="true" navButtonPress="navBack">
+		<content>
+			<f:Form editable="true">
+				<f:layout>
+					<f:ResponsiveGridLayout 
+						labelSpanXL="4" labelSpanL="2" labelSpanM="3" labelSpanS="12" 
+						emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0"
+						columnsXL="2" columnsL="1" columnsM="1" 
+						adjustLabelSpan="false" singleContainerFullSize="false" />
+				</f:layout>
+				<f:formContainers>
+					<f:FormContainer title="节点编号【{task>/taskId}】" >
+						<f:formElements>
+							<f:FormElement label="步骤">
+								<f:fields>
+									<Slider min="1" max="15" value="{task>/step}" 
+										enableTickmarks="true" 
+										inputsAsTooltips="true" 
+										class="sapUiSmallMarginBottom" 
+										width="100%"/>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="节点名称">
+								<f:fields>
+									<Input value="{task>/name}" />
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="节点类型">
+								<f:fields>
+									<Select forceSelection="false" selectedKey="{task>/type}">
+										<core:Item key="2" text="单签" />
+										<core:Item key="3" text="会签" />
+										<core:Item key="6" text="系统调度" />
+									</Select>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="匹配规则">
+								<f:fields>
+									<Select forceSelection="false" selectedKey="{task>/filterId}"
+										items="{
+											path: 'fSection>/',
+											sorter: { path: 'key' }
+										}">
+										<core:Item key="{fSection>filterId}" text="{fSection>name}" />
+									</Select>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="审批持续时间">
+								<f:fields>
+									<Input value="{task>/duration}" tooltip="任务持续时间" />
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="备选审批人">
+								<f:fields>
+									<Input value="{task>/standby}" tooltip="任务过期未审批自动转给备选审批人" />
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="审批通过率">
+								<f:fields>
+									<Input value="{task>/ratio}" tooltip="定义几人同意算任务通过" />
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="手选审批人">
+								<f:fields>
+									<Switch state="{task>/isSelect}" tooltip="手选下一审批节点的审批人"/>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="业务挂起">
+								<f:fields>
+									<Switch state="{task>/pending}" tooltip="等待业务完成后激活任务"/>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="状态">
+								<f:fields>
+									<RadioButtonGroup selectedIndex="{task>/status}" columns="3">
+										<buttons>
+											<RadioButton id="RB0" text="" visible="false"/>
+											<RadioButton id="RB1" text="正常" valueState="Success"/>
+											<RadioButton id="RB2" text="锁定" valueState="Warning"/>
+											<RadioButton id="RB3" text="删除" valueState="Error"/>
+										</buttons>
+									</RadioButtonGroup>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
+			<Panel expandable="true" expanded="true" width="auto" class="sapUiResponsiveMargin">
+				<headerToolbar>
+					<Toolbar height="3rem">
+						<Title text="审批角色"/>
+						<ToolbarSpacer />
+						<Button text="添加" icon="sap-icon://add" press="handleRoleAdd" visible="{=${task>/taskId}===undefined?false:true}"/>
+					</Toolbar>
+				</headerToolbar>
+				<content>
+					<List noDataText="未配置角色..."
+						growing="true" growingThreshold="10" growingScrollToLoad="true"
+						items="{roles>/}"
+						mode="Delete"
+						delete="handleRoleDelete">
+						<items>
+							<StandardListItem
+								type="DetailAndActive"
+								detailPress="handleRoleEdit"
+								icon="sap-icon://role" 
+								title="{roles>roleName}"
+								info="{roles>roleId}"
+								description="{roles>filterName}"
+								infoState="Success"
+								 />
+						</items>
+					</List>
+				</content>
+			</Panel>
+		</content>
+		<footer>
+			<Bar>
+				<contentRight>
+					<Button id="save" text="保存" type="Emphasized" press="handleSavePress" />
+					<Button id="cancel" text="取消" press="handleCancelPress" />
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</core:View>

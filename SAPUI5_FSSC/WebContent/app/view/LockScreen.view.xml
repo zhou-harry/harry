@@ -1,0 +1,33 @@
+<core:View xmlns:core="sap.ui.core" 
+		xmlns:mvc="sap.ui.core.mvc" 
+		xmlns="sap.m"
+		xmlns:f="sap.f"
+		xmlns:tool="harry.app.util"
+		controllerName="harry.app.controller.LockScreen" xmlns:html="http://www.w3.org/1999/xhtml">
+		
+		<FlexBox height="100%" alignItems="Center" justifyContent="Center">
+		<items>
+			<FlexBox id="contentBox" direction="Column" alignItems="Center" 
+				width="{
+					path: 'view>/isPhone',
+					formatter: '.formatter.loginWidthValue'
+				}">
+				<items>
+					<f:Avatar id="preview" src="{luser>/preview}" displaySize="XL" class="sapUiSmallMarginTop"/>
+					<Label text="{luser>/name}" labelFor="input-b" design="Bold" class="sapUiTinyMargin"/>
+					<Input id="passwordInput" type="Password" placeholder="密码 ..."
+						valueStateText="密码无效." width="100%"
+						value="{path : 'luser>/password',type : 'sap.ui.model.type.String',constraints : {minLength: 1,maxLength: 10}}">
+					</Input>
+					<Button id="loginbtn" text="登  陆" press="onPressLogin" icon="sap-icon://log"
+						width="200px" class="sapUiTinyMargin">
+						<layoutData>
+							<FlexItemData growFactor="1" />
+						</layoutData>
+					</Button>
+					<tool:LockScreen/>
+				</items>
+			</FlexBox>
+		</items>
+	</FlexBox>
+</core:View>

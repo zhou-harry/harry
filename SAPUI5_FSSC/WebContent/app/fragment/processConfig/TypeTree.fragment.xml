@@ -1,0 +1,23 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:tnt="sap.tnt">
+	<Dialog id="typeTreeId" title="流程类型" type="Message"
+		afterClose="cancelSelect" draggable="true" resizable="true">
+		<content>
+			<Tree id="pdtree" items="{path: 'tree>/'}"
+				mode="SingleSelectMaster" 
+				includeItemInSelection="false" 
+				itemPress="onChangeSelect"
+				class="sapUiContentPadding" >
+				<StandardTreeItem 
+					title="{tree>name}"
+					type="{= ${tree>deploymentCount}> 0?'Active':'Inactive'}"  
+					icon="{= ${tree>deploymentCount}> 0?'sap-icon://action-settings':'sap-icon://busy'}"  />
+			</Tree>
+		</content>
+		<endButton>
+			<Button text="取消" press="cancelSelect" />
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

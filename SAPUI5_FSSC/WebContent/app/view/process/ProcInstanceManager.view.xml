@@ -1,0 +1,246 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" 
+	xmlns:t="sap.ui.table"
+	xmlns:l="sap.ui.layout"
+	xmlns:base="sap.ui.base"
+	xmlns:tool="harry.app.util" 
+	controllerName="harry.app.controller.process.ProcInstance"
+	xmlns:html="http://www.w3.org/1999/xhtml" width="100%">
+	<ScrollContainer
+		height="{=${v>/height}-30}px"
+		width="100%"
+		horizontal="true"
+		vertical="true"
+		focusable="true">
+	<ObjectHeader
+		id="processInst"
+		responsive="true"
+		title="{inst>/description}"
+		titleActive="true"
+		titlePress="handleMasterPress"
+		number="流程号：{inst>/instanceId}"
+		visible="{v>/visible}"
+		backgroundDesign="Transparent"
+		width="100%">
+		<attributes>
+			<ObjectAttribute title="流程类型" text="{inst>/processName}" active="true" press="showProcessDef"/>
+			<ObjectAttribute title="业务编号" text="{inst>/businessKey}" active="true" press="showBusiness"/>
+			<ObjectAttribute title="申请人" text="{inst>/startUserId}" />
+			<ObjectAttribute title="申请时间" text="{
+				path: 'inst>/startTime',
+				type: 'sap.ui.model.type.DateTime',
+				formatOptions: {style: 'short'}
+			}" />
+		</attributes>
+		<statuses>
+ 			<ObjectStatus title="状态" 
+ 				text="{= ${inst>/isEnded} ? '已结束':'进行中' }" 
+ 				state="{= ${inst>/isEnded} ? 'None' : 'Success' }"/>
+		</statuses>
+		<headerContainer>
+			<IconTabBar 
+				select="handleSelect"
+				upperCase="true">
+				<items>
+					<IconTabFilter key="ProcVariable"
+						icon="sap-icon://notes"
+						count="{=${vars>/}.length}" text="流程参数">
+						<t:Table id="procVariable"
+							rows="{vars>/}"
+							selectionMode="None"
+							visibleRowCount="7" 
+							alternateRowColors="true">
+							<t:columns>
+								<t:Column>
+									<Label text="Key" />
+									<t:template>
+										<Text text="{vars>_key}"/>
+									</t:template>
+								</t:Column>
+								<t:Column >
+									<Label text="Value" />
+									<t:template>
+										<Text text="{vars>_value}"/>
+									</t:template>
+								</t:Column>
+							</t:columns>
+						</t:Table>
+					</IconTabFilter>
+					<IconTabFilter key="ProcHistory" 
+						count="{=${hist>/}.length}"
+						icon="sap-icon://customer-history" text="审批历史">
+						<l:DynamicSideContent
+							id="taskSideContentId"
+							class="sapUiDSCExplored sapUiContentPadding"
+							containerQuery="true"
+							showSideContent="false"
+							sideContentFallDown="BelowM">
+							<l:mainContent>
+								<Table id="procHistory"
+									inset="false"
+									visibleRowCount="7" 
+									alternateRowColors="true"
+									items="{
+										path: 'hist>/',
+										sorter: {
+											path: 'taskId'
+										}
+									}">
+									<columns>
+										<Column width="15%">
+											<Text text="任务节点"/>
+										</Column>
+										<Column >
+											<Text text="类型" />
+										</Column>
+										<Column >
+											<Text text="所有权人" />
+										</Column>
+										<Column >
+											<Text text="分配时间" />
+										</Column>
+										<Column >
+											<Text text="认领时间" />
+										</Column>
+										<Column >
+											<Text text="审批耗时" />
+										</Column>
+										<Column width="30%">
+											<Text text="审批意见" />
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem>
+											<cells>
+												<ObjectIdentifier title="{hist>name}" text="{hist>taskId}" titleActive="false" titlePress="handleSideContentShow"/>
+												<Text text="{hist>description}"/>
+												<Text text="{hist>owner}" />
+												<Text text="{
+													path: 'hist>startTime',
+													type: 'sap.ui.model.type.DateTime',
+													formatOptions: {style: 'short'}
+												}" />
+												<Text text="{
+													path: 'hist>claimTime',
+													type: 'sap.ui.model.type.DateTime',
+													formatOptions: {style: 'short'}
+												}" />
+												<Text text="{hist>durationInMillis}" />
+												<FeedListItem 
+													width="100%"
+													iconDensityAware="false"
+													convertLinksToAnchorTags="All"
+													sender="{hist>assignee}"
+													text="{hist>comment}" 
+													info="{hist>reasonText}"
+													icon="{hist>preview}"
+													timestamp="{
+															path: 'hist>endTime',
+															type: 'sap.ui.model.type.DateTime',
+															formatOptions: {style: 'short'}
+														}"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+							</l:mainContent>
+							<l:sideContent>
+								<Toolbar>
+									<Title text="审批意见"/>
+									<ToolbarSpacer />
+									<Button text="关闭" type="Transparent" press="handleSideContentHide" visible="{= !${media>/phone}}" />
+								</Toolbar>
+								<List items="{
+										path: 'comments>/',
+										sorter: {
+											path: 'time'
+										}
+									}" >
+									<FeedListItem
+											sender="{comments>user}"
+											iconDensityAware="false"
+											text="{comments>message}" 
+											info="{comments>type}"
+											timestamp="{
+													path: 'comments>time',
+													type: 'sap.ui.model.type.DateTime',
+													formatOptions: {style: 'short'}
+												}"/>
+								</List>
+							</l:sideContent>
+						</l:DynamicSideContent>
+					</IconTabFilter>
+					<IconTabFilter key="ProcAttachment"
+						icon="sap-icon://attachment"
+						count="{=${attachments>/}.length}" text="附件">
+							<VBox class="sapUiTinyMargin" renderType="Bare" visible="{=! ${inst>/isEnded}}">
+								<Label text="Notes：" />
+								<TextArea id="notesId" liveChange="notesLiveChange"/>
+							</VBox>
+							<UploadCollection
+								id="procAttachmentId"
+								uploadEnabled="false"
+								maximumFilenameLength="55"
+								maximumFileSize="10"
+								multiple="true"
+								uploadUrl="{inst>/uploadUrl}"
+								items="{
+									path: 'attachments>/',
+									templateShareable: false
+								}"
+								noDataDescription="Drop files or use the &quot;+&quot; button for pending upload"
+								change="onChange"
+								fileDeleted="onFileDeleted"
+								filenameLengthExceed="onFilenameLengthExceed"
+								fileSizeExceed="onFileSizeExceed"
+								typeMissmatch="onTypeMissmatch"
+								uploadComplete="onUploadComplete"
+								beforeUploadStarts="onBeforeUploadStarts" >
+								<toolbar>
+									<OverflowToolbar id="myId" visible="{=! ${inst>/isEnded}}">
+										<ToolbarSpacer />
+										<Button id="Button" text="开始上传" press="onStartUpload" visible="false"/>
+										<UploadCollectionToolbarPlaceholder />
+									</OverflowToolbar>
+								</toolbar>
+								<items>
+									<UploadCollectionItem
+										documentId="{attachments>documentId}"
+										fileName="{attachments>fileName}"
+										mimeType="{attachments>mimeType}"
+										thumbnailUrl="{attachments>thumbnailUrl}"
+										url="{attachments>url}"
+										enableEdit="false"
+										visibleEdit="false">
+										<attributes>
+											<ObjectAttribute title="Notes" text="{attachments>description}"/>
+										</attributes>
+										<statuses>
+											<ObjectStatus title="上传人" text="{attachments>user}" state="Warning"/>
+											<ObjectStatus title="上传时间" state="Warning"
+														text="{path: 'attachments>time',
+															type: 'sap.ui.model.type.DateTime',
+															formatOptions: {relative: true,relativeScale: 'auto'}}"
+											/>
+											<ObjectStatus title="任务节点" text="{attachments>taskId}" state="Warning"/>
+										</statuses>
+									</UploadCollectionItem>
+								</items>
+							</UploadCollection>
+					</IconTabFilter>
+					<IconTabFilter key="ProcDiagram"
+						icon="sap-icon://begin"
+						text="流程图">
+						<tool:Diagram id="diagid" 
+							data="{diagData>/}"
+							press="onPressDiagram">
+							<base:ManagedObject />
+						</tool:Diagram>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</headerContainer>
+	</ObjectHeader>
+</ScrollContainer>
+</core:View>
+

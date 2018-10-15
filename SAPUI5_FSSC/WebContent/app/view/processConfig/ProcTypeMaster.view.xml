@@ -1,0 +1,18 @@
+<core:View xmlns:core="sap.ui.core" 
+		xmlns:mvc="sap.ui.core.mvc" 
+		xmlns="sap.m"
+		controllerName="harry.app.controller.processConfig.ProcType" xmlns:html="http://www.w3.org/1999/xhtml">
+	
+	<Page title="流程类型" id="procTypeContainer" showHeader="true" class="sapUiSizeCompact">
+		<Tree id="pdtree" items="{path: 'tree>/'}"
+			mode="SingleSelectMaster" 
+			includeItemInSelection="false" 
+			itemPress="onItemPress">
+			<StandardTreeItem 
+				title="{tree>name}"
+				type="{= ${tree>deploymentCount}> 0?'Active':'Inactive'}" 
+				icon="{= ${tree>deploymentCount}> 0?'sap-icon://action-settings':'sap-icon://busy'}" 
+			/>
+		</Tree>
+	</Page>
+</core:View>

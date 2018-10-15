@@ -1,0 +1,18 @@
+<core:View xmlns:core="sap.ui.core" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns="sap.m"
+	xmlns:t="harry.app.util"
+	controllerName="harry.app.controller.map.DetailMap" 
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	
+	<Page title="位置 {map>/lng} ， {map>/lat}" showNavButton="true" navButtonPress="navPress">
+		<content>
+			<t:BaiduMap id="mapid" 
+				lng="{map>/lng}" 
+				lat="{map>/lat}" 
+				title="{map>/title}" 
+				address="{map>/address}"/>
+		</content>
+	</Page>
+	
+</core:View>
