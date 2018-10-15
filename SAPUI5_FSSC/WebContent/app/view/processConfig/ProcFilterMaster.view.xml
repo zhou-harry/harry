@@ -1,0 +1,27 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+		controllerName="harry.app.controller.processConfig.procFilter" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="规则过滤器">
+		<headerContent>
+			<Button icon="sap-icon://add-filter" tooltip="添加规则过滤器" press="handleFilterAdd"/>
+		</headerContent>
+		<content>
+			<List id="filterid" 
+				growing="true" 
+				mode="Delete"
+				delete="handleFilterDelete"
+				items="{path: 'filters>/'}">
+				<StandardListItem 
+					type="DetailAndActive"
+					detailPress="handleFilterEdit"
+					icon="sap-icon://cancel-share" 
+					title="{filters>name}" 
+					description="{filters>filterId}"
+					info="{
+							path: 'filters>type',
+							formatter: '.formatter.filterType'
+						}"
+					press="handleFilterPress" />
+			</List>
+		</content>
+	</Page>
+</core:View>

@@ -1,0 +1,45 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:tnt="sap.tnt">
+	<Dialog id="roleEditId" title="角色编辑" type="Message"
+		afterClose="cancelRoleSave" draggable="true" resizable="true">
+		<content>
+			<f:Form editable="true">
+				<f:layout>
+					<f:ResponsiveGridLayout 
+						labelSpanXL="4" labelSpanL="2" labelSpanM="3" labelSpanS="12" 
+						emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0"
+						columnsXL="2" columnsL="1" columnsM="1" 
+						adjustLabelSpan="false" singleContainerFullSize="false" />
+				</f:layout>
+				<f:formContainers>
+					<f:FormContainer>
+						<f:formElements>
+							<f:FormElement label="角色名称">
+								<f:fields>
+									<Input value="{rEdit>/name}" />
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="角色类型">
+								<f:fields>
+									<Select forceSelection="false"  selectedKey="{rEdit>/type}">
+										<core:Item key="1" text="审批角色" />
+										<core:Item key="2" text="邮件通知角色" />
+										<core:Item key="3" text="抄送角色" />
+									</Select>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
+		</content>
+		<beginButton>
+			<Button text="保存" press="confirmRoleSave" />
+		</beginButton>
+		<endButton>
+			<Button text="取消" press="cancelRoleSave" />
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

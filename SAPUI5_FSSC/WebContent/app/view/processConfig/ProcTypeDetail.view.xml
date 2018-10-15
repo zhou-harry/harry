@@ -1,0 +1,71 @@
+<core:View xmlns:core="sap.ui.core"
+		   xmlns="sap.uxap"
+		   xmlns:layout="sap.ui.layout"
+		   xmlns:m="sap.m"
+		controllerName="harry.app.controller.processConfig.ProcType" xmlns:html="http://www.w3.org/1999/xhtml">
+		<m:Page title="流程类型关联维度及表单" showNavButton="true" navButtonPress="navBack">
+			<ObjectPageLayout id="ObjectPageLayout" 
+				enableLazyLoading="true" 
+				useIconTabBar="true" 
+				showTitleInHeaderContent="false"
+				navigate="onChangeSection">
+				<headerTitle>
+					<ObjectPageHeader objectTitle="{type>/name}" objectSubtitle="编号：{type>/type}" >
+						<sideContentButton>
+							<m:Button icon="{f>/icon}" text="{f>/title}" press="handleEditForm"/>
+						</sideContentButton>
+					</ObjectPageHeader>
+				</headerTitle>
+				<sections>
+					<ObjectPageSection id="dimension" title="维度【{=${pdms>/}.length}】">
+						<subSections>
+							<ObjectPageSubSection>
+								<blocks>
+									<m:List id="pdmsid"
+										mode="Delete"
+										delete="handleDeleteDms"
+										growing="true"
+										items="{path: 'pdms>/'}" >
+										<m:headerToolbar>
+											<m:Toolbar>
+												<m:Title text="流程类型所涉及的维度" level="H2" />
+												<m:ToolbarSpacer />
+												<m:Button text="添加" icon="sap-icon://add" press="handleAddPdms" />
+											</m:Toolbar>
+										</m:headerToolbar>
+										<m:StandardListItem icon="sap-icon://blank-tag" title="{pdms>key}" description="{pdms>name}"/>
+									</m:List>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+					<ObjectPageSection id="matchid" >
+						<subSections>
+							<ObjectPageSubSection title="流程匹配器【{=${matchers>/}.length}】">
+								<blocks>
+									<m:List id="matchersid" items="{matchers>/}" mode="Delete" delete="handleMatcherDelete">
+										<m:headerToolbar>
+											<m:Toolbar>
+												<m:ToolbarSpacer />
+												<m:Button text="添加" icon="sap-icon://add" press="handleMatcherAdd" />
+											</m:Toolbar>
+										</m:headerToolbar>
+										<m:items>
+											<m:ObjectListItem
+												icon="sap-icon://process"
+												title="{matchers>DEF_NAME}"
+												templateShareable="true"
+												intro="{matchers>PROC_KEY}"
+												attributes="{matchers>items/}">
+												<m:ObjectAttribute title="{matchers>NAME_}" text="{matchers>MATCHER}" />
+											</m:ObjectListItem>
+										</m:items>
+									</m:List>
+								</blocks>
+							</ObjectPageSubSection>
+						</subSections>
+					</ObjectPageSection>
+				</sections>
+			</ObjectPageLayout>
+		</m:Page>
+</core:View>

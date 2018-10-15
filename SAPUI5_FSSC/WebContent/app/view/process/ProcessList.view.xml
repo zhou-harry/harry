@@ -1,0 +1,131 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+		controllerName="harry.app.controller.process.ProcessList" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="【{type>/name}】" showNavButton="true" navButtonPress="navBack">
+		<content>
+			<IconTabBar
+				select="handleSelect"
+				class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter
+						icon="sap-icon://process"
+						iconColor="Critical"
+						count="{=${process>/}.length}"
+						text="待处理"
+						key="instance" >
+							<List id="processList" items="{path: 'process>/'}" class="sapContrast sapContrastPlus">
+								<NotificationListItem
+										press="onProcessPress"
+										hideShowMoreButton="false"
+										showCloseButton="false"
+										showButtons="false"
+										title="{process>description}（#{process>businessKey}）"
+										description="{process>processName} ▪ {process>taskName} ▪ 【流程号：{process>instanceId}】{process>taskType}"
+										datetime="申请时间：{path: 'process>startTime',type: 'sap.ui.model.type.DateTime',formatOptions: {relative: true,relativeScale: 'auto'}}"
+										authorName="申请人：{process>startUserId}"
+										authorPicture="{process>preview}"
+										priority="{process>priority}">
+									<buttons>
+										<Button text="受理" type="Accept" press="onAcceptPress"/>
+										<Button text="取消受理" type="Reject" press="onRejectPress"/>
+									</buttons>
+								</NotificationListItem>
+							</List>
+						</IconTabFilter>
+					<IconTabSeparator />
+					<IconTabFilter
+						icon="sap-icon://process"
+						count="{=${apply>/}.length}"
+						text="我的申请"
+						key="apply" >
+						<List id="applyList" items="{path: 'apply>/'}" class="sapContrast sapContrastPlus">
+								<headerToolbar>
+									<Toolbar visible="true" >
+										<SearchField liveChange="onApplySearch" width="100%" />
+											<ToolbarSpacer />
+											<Button icon="sap-icon://drop-down-list" press="handleApplySearch" />
+									</Toolbar>
+								</headerToolbar>
+							<NotificationListGroup
+								hideShowMoreButton="false"
+								showCloseButton="false"
+								showButtons="true"
+								showEmptyGroup="true"
+								collapsed="true"
+								enableCollapseButtonWhenEmpty="true"
+								title="{apply>description}（#{apply>businessKey}）"
+								datetime="申请时间：{path: 'apply>startTime',type: 'sap.ui.model.type.DateTime',formatOptions: {relative: true,relativeScale: 'auto'}}"
+								authorName="申请人：{apply>startUserId}"
+								authorPicture="{apply>preview}"
+								items="{path: 'apply>tasks/',templateShareable:true}">
+								<NotificationListItem
+									hideShowMoreButton="false"
+									showCloseButton="false"
+									title="{apply>name}{apply>description}"
+									description="{apply>comment}"
+									datetime="【{path: 'apply>endTime',type: 'sap.ui.model.type.DateTime',formatOptions: {relative: true,relativeScale: 'auto'}} ▪ {apply>reasonText}】"
+									authorName="审批人：{apply>assignee}"
+									authorPicture="{apply>preview}"
+									priority="{
+										path: 'apply>deleteReason',
+										formatter: '.formatter.taskPriority'
+									}">
+								</NotificationListItem>
+								<buttons>
+									<Button text="{=${apply>isEnded}?'已结束':'进行中'}" type="None" enabled="false"/>
+									<Button text="查看详情" type="Accept" press="onApplyPress"/>
+								</buttons>
+							</NotificationListGroup>
+						</List>
+						</IconTabFilter>
+					<IconTabSeparator />
+					<IconTabFilter
+						icon="sap-icon://history"
+						iconColor="Positive"
+						count="{=${history>/}.length}"
+						text="我的已办"
+						key="history" >
+						<List id="historyList" items="{path: 'history>/'}" class="sapContrast sapContrastPlus">
+								<headerToolbar>
+									<Toolbar visible="true" >
+										<SearchField liveChange="onHistorySearch" width="100%" />
+											<ToolbarSpacer />
+											<Button icon="sap-icon://drop-down-list" press="handleHistorySearch" />
+									</Toolbar>
+								</headerToolbar>
+							<NotificationListGroup
+								hideShowMoreButton="false"
+								showCloseButton="false"
+								showButtons="true"
+								showEmptyGroup="true"
+								collapsed="true"
+								enableCollapseButtonWhenEmpty="true"
+								title="{history>description}（#{history>businessKey}）"
+								datetime="申请时间：{path: 'history>startTime',type: 'sap.ui.model.type.DateTime',formatOptions: {relative: true,relativeScale: 'auto'}}"
+								authorName="申请人：{history>startUserId}"
+								authorPicture="{history>preview}"
+								items="{path: 'history>tasks/',templateShareable:true}">
+								<NotificationListItem
+									hideShowMoreButton="false"
+									showCloseButton="false"
+									title="{history>name}{history>description}"
+									description="{history>comment}"
+									datetime="【{path: 'history>endTime',type: 'sap.ui.model.type.DateTime',formatOptions: {relative: true,relativeScale: 'auto'}} ▪ {history>reasonText}】"
+									authorName="审批人：{history>assignee}"
+									authorPicture="{history>preview}"
+									priority="{
+										path: 'history>deleteReason',
+										formatter: '.formatter.taskPriority'
+									}">
+								</NotificationListItem>
+								<buttons>
+									<Button text="{=${history>isEnded}?'已结束':'进行中'}" type="None" enabled="false"/>
+									<Button text="查看详情" type="Accept" press="onHistoryPress"/>
+								</buttons>
+							</NotificationListGroup>
+						</List>
+					</IconTabFilter>
+				</items>
+			</IconTabBar>
+		</content>
+	</Page>
+</core:View>

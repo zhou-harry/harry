@@ -1,0 +1,130 @@
+<mvc:View
+	controllerName="harry.app.controller.Home"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:t="sap.ui.table"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page showHeader="false">
+		<l:BlockLayout id="BlockLayout" background="Default">
+			<l:BlockLayoutRow>
+				<l:BlockLayoutCell class="sapUiNoContentPadding headerBlock">
+					<Carousel id="welcomeCarousel"
+							showPageIndicator="false"
+							loop="true"
+							pageChanged="onCarouselPageChanged">
+							<pages>
+								<VBox renderType="Bare">
+									<Image width="100%" src="{
+											path: 'view>/isPhone',
+											formatter: '.formatter.srcImageValue'
+										}"/>
+									<Title text="财务共享平台" class="welcomeCarouselText" textAlign="Left" />
+								</VBox>
+								<VBox renderType="Bare">
+									<Image width="100%" src="{
+											path: 'view>/isPhone',
+											formatter: '.formatter.srcImageValue'
+										}"/>
+									<Title text="财务共享平台" class="welcomeCarouselText" textAlign="Left" />
+								</VBox>
+							</pages>
+						</Carousel>
+				</l:BlockLayoutCell>
+			</l:BlockLayoutRow>
+			<l:BlockLayoutRow>
+				<l:BlockLayoutCell 
+					width="4" 
+					class="sapUiNoContentPadding"
+					content="{category>/}">
+					<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop bShadow bShadow-8" 
+						header="【{category>name}】" 
+						subheader="待处理" 
+						press="press">
+						<TileContent unit="历史记录" footer="{category>countHis}" footerColor="Good">
+							<NumericContent value="{category>count}" valueColor="Critical" icon="sap-icon://task" />
+						</TileContent>
+					</GenericTile>
+				</l:BlockLayoutCell>
+			</l:BlockLayoutRow>
+			<l:BlockLayoutRow>
+				<l:BlockLayoutCell
+					backgroundColorSet="ColorSet11"
+					backgroundColorShade="ShadeD">
+					<l:VerticalLayout>
+						<core:Icon
+							src="sap-icon://role"
+							size="2.5rem"
+							color="Default"/>
+						<Title
+							text="{i18n>administrationTitle}"
+							titleStyle="H2"
+							class="sapUiTinyMarginTopBottom"/>
+						<Text
+							text="{i18n>administrationContent}"
+							class="sapUiTinyMarginBottom"/>
+						<Link text="{i18n>accessLink}"/>
+						<Link text="{i18n>learnLink}"/>
+					</l:VerticalLayout>
+				</l:BlockLayoutCell>
+				<l:BlockLayoutCell
+					backgroundColorSet="ColorSet11"
+					backgroundColorShade="ShadeB">
+					<l:VerticalLayout>
+						<core:Icon
+							src="sap-icon://add-product"
+							size="2.5rem"
+							color="Default"/>
+						<Title
+							text="{i18n>productTitle}"
+							titleStyle="H2"
+							class="sapUiTinyMarginTopBottom"/>
+						<Text
+							text="{i18n>productContent}"
+							class="sapUiTinyMarginBottom"/>
+						<Link text="{i18n>accessLink}"/>
+						<Link text="{i18n>learnLink}"/>
+					</l:VerticalLayout>
+				</l:BlockLayoutCell>
+				<l:BlockLayoutCell
+					backgroundColorSet="ColorSet11"
+					backgroundColorShade="ShadeD">
+					<l:VerticalLayout>
+						<core:Icon
+							src="sap-icon://customer-financial-fact-sheet"
+							size="2.5rem"
+							color="Default"/>
+						<Title
+							text="{i18n>revenueTitle}"
+							titleStyle="H2"
+							class="sapUiTinyMarginTopBottom"/>
+						<Text
+							text="{i18n>revenueContent}"
+							class="sapUiTinyMarginBottom"/>
+						<Link text="{i18n>accessLink}"/>
+						<Link text="{i18n>learnLink}"/>
+					</l:VerticalLayout>
+				</l:BlockLayoutCell>
+				<l:BlockLayoutCell
+					backgroundColorSet="ColorSet11"
+					backgroundColorShade="ShadeB">
+					<l:VerticalLayout>
+						<core:Icon
+							src="sap-icon://supplier"
+							size="2.5rem"
+							color="Default"/>
+						<Title
+							text="{i18n>supplierTitle}"
+							titleStyle="H2"
+							class="sapUiTinyMarginTopBottom"/>
+						<Text
+							text="{i18n>supplierContent}"
+							class="sapUiTinyMarginBottom"/>
+						<Link text="{i18n>accessLink}"/>
+						<Link text="{i18n>learnLink}"/>
+					</l:VerticalLayout>
+				</l:BlockLayoutCell>
+			</l:BlockLayoutRow>
+		</l:BlockLayout>
+	</Page>
+</mvc:View>

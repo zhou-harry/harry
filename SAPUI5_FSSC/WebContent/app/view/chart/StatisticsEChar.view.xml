@@ -1,0 +1,49 @@
+<core:View xmlns:core="sap.ui.core" 
+			xmlns:mvc="sap.ui.core.mvc" 
+			xmlns="sap.m"
+			xmlns:base="sap.ui.base"
+			xmlns:tool="harry.app.util"
+		 	xmlns:html="http://www.w3.org/1999/xhtml"
+		 	controllerName="harry.app.controller.chart.StatisticsEChar">
+	<Page title="Title">
+		<content>
+		
+			<tool:EChartBar id="barid" 
+				height="400px"
+				title="服装销量数据" 
+				subtitle="bar" 
+				location="horizontal" 
+				data="{/barData}"
+				waterMarkText="周宏"
+				press="onPress">
+				<base:ManagedObject />
+			</tool:EChartBar>
+			
+			<tool:EChartPie id="pieid" 
+				height="400px"
+				title="UI5_EChart" 
+				subtitle="pie" 
+				data="{/pieData}" 
+				press="onPress">
+				<base:ManagedObject />
+			</tool:EChartPie> 
+			
+			<tool:EChartArea id="areaid" 
+				height="400px"
+				title="大数据面积图" 
+				subtitle="2017年" 
+				data="{/areaData}" 
+				waterMarkText="周宏" 
+				press="onPress">
+				<base:ManagedObject />
+			</tool:EChartArea>
+			
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer />
+				<Button text="刷新数据" press="onRefresh" />
+			</Toolbar>
+		</footer>
+	</Page>
+</core:View>

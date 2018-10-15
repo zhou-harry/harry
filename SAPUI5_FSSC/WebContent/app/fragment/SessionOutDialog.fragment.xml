@@ -1,0 +1,15 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Dialog id="sessionOut" title="系统提示" type="Message" state="Error"
+		draggable="true" resizable="true">
+		<content>
+			<core:Icon src="sap-icon://disconnected" size="3rem"
+				class="sapUiMediumMargin" />
+			<Text text="连接超时，请重新登录!"
+				class="sapUiSmallMargin sapThemeHighlight-asColor" />
+		</content>
+		<beginButton press="onCloseDialog">
+			<Button text="重新登录" press="onCloseDialog" />
+		</beginButton>
+	</Dialog>
+</core:FragmentDefinition>

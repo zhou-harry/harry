@@ -1,0 +1,29 @@
+<core:View xmlns:core="sap.ui.core" 
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns="sap.m"
+	controllerName="harry.app.controller.map.MasterMap" 
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="获取手机定位信息">
+		<content>
+			<List id="mapList" items="{path : 'map>/',sorter : {path : 'distance'}}">
+				<headerToolbar>
+					<Toolbar>
+						<Input id="searchid"/>
+						<ToolbarSpacer />
+						<Button text="搜索" press="initMap" />
+						<Button icon="sap-icon://map" press="showMap" />
+					</Toolbar>
+				</headerToolbar>
+				<items>
+					<ObjectListItem title="{map>title}" type="Active"
+						press="onListItemPress" number="{map>distance}" numberUnit="km">
+						<attributes>
+							<ObjectAttribute text="{map>address}" />
+							<ObjectAttribute text="经度:{map>lng} ， 纬度:{map>lat}" />
+						</attributes>
+					</ObjectListItem>
+				</items>
+			</List>
+		</content>
+	</Page>
+</core:View>

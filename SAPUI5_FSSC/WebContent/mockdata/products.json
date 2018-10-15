@@ -1,0 +1,348 @@
+{
+	"ProductCollection": [
+		{
+			"ProductId": "722501",
+			"Category": "Laptops",
+			"MainCategory": "Computer Systems",
+			"TaxTarifCode": "1",
+			"SupplierName": "Very Best Screens",
+			"WeightMeasure": 4.2,
+			"WeightUnit": "KG",
+			"Description": "Notebook Basic 15 with 2,80 GHz quad core, 15\" LCD, 4 GB DDR3 RAM, 500 GB Hard Disc, Windows 8 Pro",
+			"Name": "费用报销申请测试测试测试",
+			"DateOfSale": "2017-03-26",
+			"ProductPicUrl": "test-resources/sap/ui/demokit/explored/img/HT-1000.jpg",
+			"Status": "Available",
+			"Quantity": 10,
+			"UoM": "PC",
+			"CurrencyCode": "EUR",
+			"Price": 956,
+			"Width": 30,
+			"Depth": 18,
+			"Height": 3,
+			"DimUnit": "cm"
+		},
+		{
+			"ProductId": "HT-1001",
+			"Category": "Laptops",
+			"MainCategory": "Computer Systems",
+			"TaxTarifCode": "1",
+			"SupplierName": "Very Best Screens",
+			"WeightMeasure": 4.5,
+			"WeightUnit": "KG",
+			"Description": "Notebook Basic 17 with 2,80 GHz quad core, 17\" LCD, 4 GB DDR3 RAM, 500 GB Hard Disc, Windows 8 Pro",
+			"Name": "Notebook Basic 17",
+			"DateOfSale": "2017-04-17",
+			"ProductPicUrl": "test-resources/sap/ui/demokit/explored/img/HT-1001.jpg",
+			"Status": "Available",
+			"Quantity": 20,
+			"UoM": "PC",
+			"CurrencyCode": "EUR",
+			"Price": 1249,
+			"Width": 29,
+			"Depth": 17,
+			"Height": 3.1,
+			"DimUnit": "cm"
+		},
+		{
+			"ProductId": "HT-1002",
+			"Category": "Laptops",
+			"MainCategory": "Computer Systems",
+			"TaxTarifCode": "1",
+			"SupplierName": "Very Best Screens",
+			"WeightMeasure": 4.2,
+			"WeightUnit": "KG",
+			"Description": "Notebook Basic 18 with 2,80 GHz quad core, 18\" LCD, 8 GB DDR3 RAM, 1000 GB Hard Disc, Windows 8 Pro",
+			"Name": "Notebook Basic 18",
+			"DateOfSale": "2017-01-07",
+			"ProductPicUrl": "test-resources/sap/ui/demokit/explored/img/HT-1002.jpg",
+			"Status": "Available",
+			"Quantity": 10,
+			"UoM": "PC",
+			"CurrencyCode": "EUR",
+			"Price": 1570,
+			"Width": 28,
+			"Depth": 19,
+			"Height": 2.5,
+			"DimUnit": "cm"
+		},
+		{
+			"ProductId": "HT-1003",
+			"Category": "Laptops",
+			"MainCategory": "Computer Systems",
+			"TaxTarifCode": "1",
+			"SupplierName": "Smartcards",
+			"WeightMeasure": 4.2,
+			"WeightUnit": "KG",
+			"Description": "Notebook Basic 19 with 2,80 GHz quad core, 19\" LCD, 8 GB DDR3 RAM, 1000 GB Hard Disc, Windows 8 Pro",
+			"Name": "Notebook Basic 19",
+			"DateOfSale": "2017-04-09",
+			"ProductPicUrl": "test-resources/sap/ui/demokit/explored/img/HT-1003.jpg",
+			"Status": "Available",
+			"Quantity": 15,
+			"UoM": "PC",
+			"CurrencyCode": "EUR",
+			"Price": 1650,
+			"Width": 32,
+			"Depth": 21,
+			"Height": 4,
+			"DimUnit": "cm"
+		},
+		{
+			"ProductId": "HT-1007",
+			"Category": "Accessories",
+			"MainCategory": "Computer Components",
+			"TaxTarifCode": "1",
+			"SupplierName": "Technocom",
+			"WeightMeasure": 0.2,
+			"WeightUnit": "KG",
+			"Description": "Digital Organizer with State-of-the-Art Storage Encryption",
+			"Name": "ITelO Vault",
+			"DateOfSale": "2017-05-17",
+			"ProductPicUrl": "test-resources/sap/ui/demokit/explored/img/HT-1007.jpg",
+			"Status": "Available",
+			"Quantity": 15,
+			"UoM": "PC",
+			"CurrencyCode": "EUR",
+			"Price": 299,
+			"Width": 32,
+			"Depth": 22,
+			"Height": 3,
+			"DimUnit": "cm"
+		},
+		{
+			"ProductId": "HT-1010",
+			"Category": "Accessories",
+			"MainCategory": "Computer Systems",
+			"TaxTarifCode": "1",
+			"SupplierName": "Very Best Screens",
+			"WeightMeasure": 4.3,
+			"WeightUnit": "KG",
+			"Description": "Notebook Professional 15 with 2,80 GHz quad core, 15\" Multitouch LCD, 8 GB DDR3 RAM, 500 GB SSD - DVD-Writer (DVD-R/+R/-RW/-RAM),Windows 8 Pro",
+			"Name": "Notebook Professional 15",
+			"DateOfSale": "2017-02-22",
+			"ProductPicUrl": "test-resources/sap/ui/demokit/explored/img/HT-1010.jpg",
+			"Status": "Available",
+			"Quantity": 16,
+			"UoM": "PC",
+			"CurrencyCode": "EUR",
+			"Price": 1999,
+			"Width": 33,
+			"Depth": 20,
+			"Height": 3,
+			"DimUnit": "cm"
+		},
+		{
+			"ProductId": "HT-1011",
+			"Category": "Laptops",
+			"MainCategory": "Computer Systems",
+			"TaxTarifCode": "1",
+			"SupplierName": "Very Best Screens",
+			"WeightMeasure": 4.1,
+			"WeightUnit": "KG",
+			"Description": "Notebook Professional 17 with 2,80 GHz quad core, 17\" Multitouch LCD, 8 GB DDR3 RAM, 500 GB SSD - DVD-Writer (DVD-R/+R/-RW/-RAM),Windows 8 Pro",
+			"Name": "Notebook Professional 17",
+			"DateOfSale": "2017-01-02",
+			"ProductPicUrl": "test-resources/sap/ui/demokit/explored/img/HT-1011.jpg",
+			"Status": "Available",
+			"Quantity": 17,
+			"UoM": "PC",
+			"CurrencyCode": "EUR",
+			"Price": 2299,
+			"Width": 33,
+			"Depth": 23,
+			"Height": 2,
+			"DimUnit": "cm"
+		},
+		{
+			"ProductId": "HT-1020",
+			"Category": "Accessories",
+			"MainCategory": "Computer Components",
+			"TaxTarifCode": "1",
+			"SupplierName": "Technocom",
+			"WeightMeasure": 0.16,
+			"WeightUnit": "KG",
+			"Description": "Digital Organizer with State-of-the-Art Encryption for Storage and Network Communications",
+			"Name": "ITelO Vault Net",
+			"DateOfSale": "2017-05-08",
+			"ProductPicUrl": "test-resources/sap/ui/demokit/explored/img/HT-1020.jpg",
+			"Status": "Available",
+			"Quantity": 14,
+			"UoM": "PC",
+			"CurrencyCode": "EUR",
+			"Price": 459,
+			"Width": 10,
+			"Depth": 1.8,
+			"Height": 17,
+			"DimUnit": "cm"
+		}
+	],
+	"ProductCollectionStats": {
+		"Counts": {
+			"Total": 123,
+			"Weight": {
+				"Ok": 53,
+				"Heavy": 51,
+				"Overweight": 19
+			}
+		},
+		"Groups": {
+			"Category": {
+				"Accessories" : 34,
+				"Desktop Computers" : 7,
+				"Flat Screens" : 2,
+				"Keyboards" : 4,
+				"Laptops" : 11,
+				"Printers" : 9,
+				"Smartphones and Tablets" : 9,
+				"Mice" : 7,
+				"Computer System Accessories" : 8,
+				"Graphics Card" : 4,
+				"Scanners" : 4,
+				"Speakers" : 3,
+				"Software" : 8,
+				"Telekommunikation" : 3,
+				"Servers" : 3,
+				"Flat Screen TVs" : 3
+			},
+			"SupplierName": {
+				"Titanium": 21,
+				"Technocom": 22,
+				"Red Point Stores": 7,
+				"Very Best Screens": 14,
+				"Smartcards": 2,
+				"Alpha Printers": 5,
+				"Printer for All": 8,
+				"Oxynum": 8,
+				"Fasttech": 15,
+				"Ultrasonic United": 15,
+				"Speaker Experts": 3,
+				"Brainsoft": 3
+			}
+		},
+		"Filters": [
+			{
+				"type": "Category",
+				"values": [
+					{
+						"text": "Accessories",
+						"data": 34
+					},
+					{
+						"text": "Desktop Computers",
+						"data": 7
+					},
+					{
+						"text": "Flat Screens",
+						"data": 2
+					},
+					{
+						"text": "Keyboards",
+						"data": 4
+					},
+					{
+						"text": "Laptops",
+						"data": 11
+					},
+					{
+						"text": "Printers",
+						"data": 9
+					},
+					{
+						"text": "Smartphones and Tablets",
+						"data": 9
+					},
+					{
+						"text": "Mice",
+						"data": 7
+					},
+					{
+						"text": "Computer System Accessories",
+						"data": 8
+					},
+					{
+						"text": "Graphics Card",
+						"data": 4
+					},
+					{
+						"text": "Scanners",
+						"data": 4
+					},
+					{
+						"text": "Speakers",
+						"data": 3
+					},
+					{
+						"text": "Software",
+						"data": 8
+					},
+					{
+						"text": "Telekommunikation",
+						"data": 3
+					},
+					{
+						"text": "Servers",
+						"data": 3
+					},
+					{
+					  "text": "Flat Screen TVs",
+					  "data": 3
+					}
+				]
+			},
+			{
+				"type": "SupplierName",
+				"values": [
+					{
+					"text": "Titanium",
+					"data": 21
+				  },
+				  {
+					"text": "Technocom",
+					"data": 22
+				  },
+				  {
+					"text": "Red Point Stores",
+					"data": 7
+				  },
+				  {
+					"text": "Very Best Screens",
+					"data": 14
+				  },
+				  {
+					"text": "Smartcards",
+					"data": 2
+				  },
+				  {
+					"text": "Alpha Printers",
+					"data": 5
+				  },
+				  {
+					"text": "Printer for All",
+					"data": 8
+				  },
+				  {
+					"text": "Oxynum",
+					"data": 8
+				  },
+				  {
+					"text": "Fasttech",
+					"data": 15
+				  },
+				  {
+					"text": "Ultrasonic United",
+					"data": 15
+				  },
+				  {
+					"text": "Speaker Experts",
+					"data": 3
+				  },
+				  {
+					"text": "Brainsoft",
+					"data": 3
+				  }
+				]
+			}
+		]
+	}
+}

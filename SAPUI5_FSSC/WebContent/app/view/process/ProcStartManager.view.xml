@@ -1,0 +1,105 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
+	xmlns:t="sap.ui.table" controllerName="harry.app.controller.process.ProcStartManager"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+
+	<VBox class="sapUiSmallMargin" id="startId">
+		<f:Form id="FormToolbar" editable="true" ariaLabelledBy="Title1">
+			<f:toolbar>
+				<Toolbar id="TB1">
+					<Title id="Title1" text="流程后台启动" level="H4" titleStyle="H4" />
+					<ToolbarSpacer />
+				</Toolbar>
+			</f:toolbar>
+			<f:layout>
+				<f:ResponsiveGridLayout labelSpanXL="4"
+					labelSpanL="2" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false"
+					emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0"
+					columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false" />
+			</f:layout>
+			<f:formContainers>
+				<f:FormContainer ariaLabelledBy="Title2">
+					<f:toolbar>
+						<Toolbar>
+							<Title id="Title2" text="启动参数" level="H5" titleStyle="H5" />
+							<ToolbarSpacer />
+							<Button id="startBtn" icon="sap-icon://begin" text="启动流程" press="onPressStart"
+								type="Emphasized" />
+						</Toolbar>
+					</f:toolbar>
+					<f:formElements>
+						<f:FormElement label="流程类型">
+							<f:fields>
+								<Input
+									type="Text"
+									value="{deploy>/typeName}"
+									placeholder="选择流程类型..."
+									enabled="true"
+									editable="true"
+									showValueHelp="true"
+									valueHelpOnly="true"
+									valueHelpRequest="handleTypeHelp">
+									<layoutData>
+										<l:GridData span="XL2 L4 M4 S5" />
+									</layoutData>
+								</Input>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="业务编号">
+							<f:fields>
+								<Input value="{deploy>/businessKey}">
+									<layoutData>
+										<l:GridData span="XL2 L4 M4 S5" />
+									</layoutData>
+								</Input>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="业务描述">
+							<f:fields>
+								<Input value="{deploy>/description}">
+									<layoutData>
+										<l:GridData span="XL2 L5 M5 S5" />
+									</layoutData>
+								</Input>
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+				</f:FormContainer>
+			</f:formContainers>
+		</f:Form>
+
+		<t:Table rows="{variables>/}" visibleRowCount="5"
+			enableSelectAll="false" selectionMode="None" alternateRowColors="true">
+			<t:toolbar>
+				<Toolbar>
+					<content>
+						<Title id="title" text="流程自定义参数" />
+						<ToolbarSpacer />
+						<Button icon="sap-icon://add" tooltip="添加自定义参数" press="onAddVar"
+							text="添加" />
+					</content>
+				</Toolbar>
+			</t:toolbar>
+			<t:columns>
+				<t:Column width="50%">
+					<Label text="变量 Key" />
+					<t:template>
+						<Input value="{variables>_key}" editable="{variables>_enabled}"/>
+					</t:template>
+				</t:Column>
+				<t:Column width="50%">
+					<Label text="变量Value" />
+					<t:template>
+						<Input value="{variables>_value}" />
+					</t:template>
+				</t:Column>
+				<t:Column>
+					<t:template>
+						<Button icon="sap-icon://delete" tooltip="删除自定义参数" press="onSelectedDelete" enabled="{variables>_enabled}"/>
+					</t:template>
+				</t:Column>
+			</t:columns>
+		</t:Table>
+	</VBox>
+
+</core:View>

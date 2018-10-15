@@ -1,0 +1,15 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ResponsivePopover
+		class="sapUiPopupWithPadding"
+		placement="Left" showHeader="false">
+		<content>
+			<Image src="{/diagram}" width="35em" densityAware="false">
+				<layoutData>
+					<FlexItemData growFactor="1" />
+				</layoutData>
+			</Image>
+		</content>
+	</ResponsivePopover>
+</core:FragmentDefinition>

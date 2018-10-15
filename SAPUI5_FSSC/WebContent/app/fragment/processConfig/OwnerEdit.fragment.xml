@@ -1,0 +1,53 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:tnt="sap.tnt">
+	<Dialog id="ownerEditId" title="审批人编辑" type="Message"
+		afterClose="cancelOwnerSave" draggable="true" resizable="true">
+		<content>
+			<f:Form editable="true">
+				<f:layout>
+					<f:ResponsiveGridLayout 
+						labelSpanXL="4" labelSpanL="2" labelSpanM="3" labelSpanS="12" 
+						emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0"
+						columnsXL="2" columnsL="1" columnsM="1" 
+						adjustLabelSpan="false" singleContainerFullSize="false" />
+				</f:layout>
+				<f:formContainers>
+					<f:FormContainer>
+						<f:formElements>
+							<f:FormElement label="审批人">
+								<f:fields>
+									<Select forceSelection="false" selectedKey="{oEdit>/ownerId}" showSecondaryValues= "true"
+										items="{
+											path: 'uSection>/',
+											sorter: { path: 'key' }
+										}">
+										<core:ListItem key="{uSection>userId}" text="{uSection>name}" additionalText= "{uSection>userId}"/>
+									</Select>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="规则过滤器">
+								<f:fields>
+									<Select forceSelection="false" selectedKey="{oEdit>/filterId}"
+										items="{
+											path: 'fSection>/',
+											sorter: { path: 'key' }
+										}">
+										<core:Item key="{fSection>filterId}" text="{fSection>name}" />
+									</Select>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
+		</content>
+		<beginButton>
+			<Button text="保存" press="confirmOwnerSave" />
+		</beginButton>
+		<endButton>
+			<Button text="取消" press="cancelOwnerSave" />
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

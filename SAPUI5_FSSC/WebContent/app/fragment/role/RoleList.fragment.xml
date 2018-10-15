@@ -1,0 +1,37 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:t="sap.ui.table">
+	<Dialog id="roleListId" title="菜单角色" type="Message" class="sapUiSizeCompact"
+		afterClose="cancelRoleList" draggable="true" resizable="true">
+		<content>
+			<t:Table id="rlistid" visibleRowCount="10" rowActionCount="1" rows="{roles>/}" 
+				selectionMode="MultiToggle"
+				selectionBehavior="Row">
+				<t:columns>
+					<t:Column width="20%" resizable="false">
+						<Label text="编号" />
+						<t:template>
+							<Text text="{roles>roleId}" wrapping="false" />
+						</t:template>
+					</t:Column>
+					<t:Column width="40%" resizable="false">
+						<Label text="名称" />
+						<t:template>
+							<Text text="{roles>name}" wrapping="false" />
+						</t:template>
+					</t:Column>
+					<t:Column width="15%" resizable="false">
+						<Label text="系统角色" />
+						<t:template>
+							<Text text="{= ${roles>isSys}?'是':'否'}" />
+						</t:template>
+					</t:Column>
+				</t:columns>
+			</t:Table>
+		</content>
+		<beginButton press="onCloseDialog">
+			<Button text="确认" press="confirmRoleSelect" />
+		</beginButton>
+		<endButton press="onCloseDialog">
+			<Button text="取消" press="cancelRoleList" />
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

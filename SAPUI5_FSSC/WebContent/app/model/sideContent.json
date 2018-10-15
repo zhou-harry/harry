@@ -1,0 +1,102 @@
+{
+	"navigation": [
+		{
+			"title": "主页",
+			"icon": "sap-icon://home",
+			"expanded": true,
+			"key": "home",
+			"items": []
+		},
+		{
+			"title": "设置",
+			"icon": "sap-icon://settings",
+			"expanded": false,
+			"key": "masterSettings",
+			"items": []
+		},
+		{
+			"title": "数据统计",
+			"icon": "sap-icon://line-chart",
+			"expanded": false,
+			"key": "statistics",
+			"items": [
+				{
+					"title": "使用情况统计",
+					"key": "Usage Statistics was pressed"
+				},
+				{
+					"title": "自定义报表",
+					"key": "statisticsEChar"
+				}
+			]
+		},
+		{
+			"title": "流程管理",
+			"icon": "sap-icon://process",
+			"expanded": false,
+			"key": "procManager",
+			"items": [
+				{
+					"title": "流程定义配置",
+					"key": "procConfig",
+					"icon": "sap-icon://customize"
+				},
+				{
+					"title": "流程模板部署",
+					"key": "procDefManager",
+					"icon": "sap-icon://bus-public-transport"
+				},
+				{
+					"title": "流程启动管理",
+					"key": "procStartManager",
+					"icon": "sap-icon://restart"
+				},
+				{
+					"title": "流程实例监测",
+					"key": "masterProcess",
+					"icon": "sap-icon://instance"
+				}
+			]
+		}
+	],
+	"fixedNavigation": [
+		{
+			"title": "GPS",
+			"icon": "sap-icon://map",
+			"expanded": false,
+			"key": "masterMap"
+		},
+		{
+			"title": "Legal",
+			"icon": "sap-icon://compare",
+			"key": "Legal was pressed"
+		}
+	],
+	"masterSettings": [
+		{
+			"title": "System Settings",
+			"key": "systemSettings",
+			"selected": true
+		},
+		{
+			"title": "Order Settings",
+			"key": "orderSettings",
+			"selected": false
+		},
+		{
+			"title": "Supplier Settings",
+			"key": "supplierSettings",
+			"selected": false
+		},
+		{
+			"title": "Campaign Settings",
+			"key": "campaignSettings",
+			"selected": false
+		},
+		{
+			"title": "Shipping Settings",
+			"key": "shipping Settings",
+			"selected": false
+		}
+	]
+}

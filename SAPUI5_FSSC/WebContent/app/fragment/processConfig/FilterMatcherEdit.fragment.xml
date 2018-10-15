@@ -1,0 +1,58 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:tnt="sap.tnt">
+	<Dialog id="matcherEditId" title="自定义规则编辑" type="Message"
+		afterClose="cancelMatcherSave" draggable="true" resizable="true">
+		<content>
+			<f:Form editable="true">
+				<f:layout>
+					<f:ResponsiveGridLayout 
+						labelSpanXL="4" labelSpanL="2" labelSpanM="3" labelSpanS="12" 
+						emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0"
+						columnsXL="2" columnsL="1" columnsM="1" 
+						adjustLabelSpan="false" singleContainerFullSize="false" />
+				</f:layout>
+				<f:formContainers>
+					<f:FormContainer title="{filter>/name}" >
+						<f:formElements>
+							<f:FormElement label="过滤维度">
+								<f:fields>
+									<Select forceSelection="false"  
+										selectedKey="{mEdit>/dmsKey}"
+										items="{
+											path: 'dmsSection>/',
+											sorter: { path: 'key' }
+										}">
+										<core:Item key="{dmsSection>key}" text="{dmsSection>name}" />
+									</Select>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="集合匹配值">
+								<f:fields>
+									<Input value="{mEdit>/matcher}" />
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="范围匹配（从）">
+								<f:fields>
+									<Input value="{mEdit>/rangeStart}" />
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="范围匹配（到）">
+								<f:fields>
+									<Input value="{mEdit>/rangeEnd}" />
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
+		</content>
+		<beginButton>
+			<Button text="保存" press="confirmMatcherSave" />
+		</beginButton>
+		<endButton>
+			<Button text="取消" press="cancelMatcherSave" />
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

@@ -1,0 +1,65 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout" xmlns="sap.m"
+	controllerName="harry.app.controller.process.ProcDefManager"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	
+	<Page title="流程模板部署" id="sideContentContainer" showHeader="false" class="sapUiSizeCompact">
+	
+		<l:DynamicSideContent id="DynamicSideContent" showSideContent="true"
+			class="sapUiDSCExplored sapUiContentPadding" 
+			sideContentFallDown="BelowM"
+			containerQuery="true">
+			<l:mainContent>
+				<Tree id="tree" headerText="系统流程类型" items="{path: 'tree>/'}"
+					mode="SingleSelectMaster" 
+					includeItemInSelection="false" 
+					itemPress="onItemPress">
+				    <CustomTreeItem type="Navigation">
+						<FlexBox alignItems="Start" width="90%">
+							<items>
+								<core:Icon size="1.5rem" src="sap-icon://action-settings" class="sapUiSmallMarginEnd sapUiSmallMarginTopBottom" />
+								<ObjectIdentifier title="{tree>name}" text="模板数量：{tree>deploymentCount}，子类型模板数量：{tree>deploymentTotal}"/>
+							</items>
+						</FlexBox>
+						<HBox alignItems="Right" class="sapUiSmallMarginTopBottom">
+							<items>
+								<Button tooltip="部署新版本的流程模板" icon="sap-icon://status-negative"
+									type="{= ${tree>deploymentCount}> 0?'Emphasized':'Default'}"
+									press="onPressDeploy" >
+								</Button>
+								<Button tooltip="流程以最新版本的模板启动流程" icon="sap-icon://begin"
+									press="onPressStart" >
+								</Button>
+							</items>
+						</HBox>
+					</CustomTreeItem>
+				</Tree>
+			</l:mainContent>
+			<l:sideContent>
+				<List id="DeploymentDetail" items="{path:'detail>/'}" growing="true"
+					growingThreshold="10" growingScrollToLoad="true" 
+					headerText="流程模板" 
+					noDataText="未配置流程模板..."					
+					mode="Delete" delete="handleDelete">
+					<items>
+						<ObjectListItem title="{detail>deploymentName}" 
+							type="Active"
+							press="onPressDiagram"
+							intro="{path: 'detail>deployTime',
+									type: 'sap.ui.model.type.DateTime',
+									formatOptions: {relative: true,relativeScale: 'auto'}
+								}">
+							<firstStatus>
+								<ObjectStatus text="{detail>deploymentId}" state="None" />
+							</firstStatus>
+							<attributes>
+								<ObjectAttribute text="正在执行:{detail>sizeInstance}" />
+								<ObjectAttribute text="历史流程:{detail>sizeHistory}"/>
+							</attributes>
+						</ObjectListItem>
+					</items>
+				</List>
+			</l:sideContent>
+		</l:DynamicSideContent>
+	</Page>
+</core:View>

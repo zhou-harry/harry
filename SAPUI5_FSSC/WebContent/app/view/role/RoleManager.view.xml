@@ -1,0 +1,72 @@
+<core:View xmlns:core="sap.ui.core" 
+		xmlns:mvc="sap.ui.core.mvc" 
+		xmlns="sap.m"
+		xmlns:l="sap.ui.layout"
+		xmlns:t="sap.ui.table"
+		controllerName="harry.app.controller.role.RoleManager" xmlns:html="http://www.w3.org/1999/xhtml">
+		<l:BlockLayout id="BlockLayout"  background="Dashboard">
+			<l:BlockLayoutRow>
+				<l:BlockLayoutCell title="菜单角色" width="2">
+					<t:Table id="role" visibleRowCount="10" rowActionCount="1" rows="{roles>/}" 
+						selectionMode="Single"
+						selectionBehavior="RowOnly"
+						rowSelectionChange="onRoleSelected" >
+						<t:toolbar>
+							<Toolbar>
+								<content>
+									<ToolbarSpacer/>
+									<Button text="添加" icon="sap-icon://add" press="onRoleAdd"/>
+								</content>
+							</Toolbar>
+						</t:toolbar>
+						<t:rowSettingsTemplate>
+							<t:RowSettings highlight="{= ${roles>isSys}?'Error':'Success'}" />
+						</t:rowSettingsTemplate>
+						<t:rowActionTemplate>
+							<t:RowAction>
+								<t:RowActionItem text= "编辑" icon="sap-icon://edit" press="onRoleEdit" />
+								<t:RowActionItem text= "删除" icon="sap-icon://delete" press="onRoleDelete" />
+							</t:RowAction>
+						</t:rowActionTemplate>
+						<t:columns>
+							<t:Column width="20%" resizable="false">
+								<Label text="编号" />
+								<t:template>
+									<Text text="{roles>roleId}" wrapping="false" />
+								</t:template>
+							</t:Column>
+							<t:Column resizable="false">
+								<Label text="名称" />
+								<t:template>
+									<Text text="{roles>name}" wrapping="false" />
+								</t:template>
+							</t:Column>
+							<t:Column width="30%" resizable="false">
+								<Label text="创建时间" />
+								<t:template>
+									<Text text="{path:'roles>created',type: 'sap.ui.model.type.DateTime',formatOptions: {style: 'short'}}" />
+								</t:template>
+							</t:Column>
+							<t:Column width="15%" resizable="false">
+								<Label text="状态" />
+								<t:template>
+									<Switch state="{roles>status}" enabled="false"/>
+								</t:template>
+							</t:Column>
+						</t:columns>
+					</t:Table>
+				</l:BlockLayoutCell>
+				<l:BlockLayoutCell title="系统菜单">
+					<ScrollContainer height="{=${v>/height}-150}px" horizontal="true" vertical="true">
+						<Tree id="tree" 
+							mode="MultiSelect" 
+							includeItemInSelection="false" 
+							selectionChange="onSelectionChange"
+							items="{path: 'tree>/'}">
+						    <StandardTreeItem icon="{tree>ICON}" title="{tree>TITLE}" selected="{tree>VALID}"/>
+						</Tree>
+					</ScrollContainer>
+				</l:BlockLayoutCell>
+			</l:BlockLayoutRow>
+		</l:BlockLayout>
+</core:View>

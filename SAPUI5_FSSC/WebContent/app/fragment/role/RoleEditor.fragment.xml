@@ -1,0 +1,42 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form">
+	<Dialog id="roleEditorId" title="菜单角色编辑" type="Message" class="sapUiSizeCompact"
+		afterClose="cancelRoleEditor" draggable="true" resizable="true">
+		<content>
+			<f:Form editable="true">
+				<f:layout>
+					<f:ResponsiveGridLayout labelSpanXL="4"
+						labelSpanL="2" labelSpanM="3" labelSpanS="12" adjustLabelSpan="false"
+						emptySpanXL="0" emptySpanL="4" emptySpanM="0" emptySpanS="0"
+						columnsXL="2" columnsL="1" columnsM="1" singleContainerFullSize="false" />
+				</f:layout>
+				<f:formContainers>
+					<f:FormContainer>
+						<f:formElements>
+							<f:FormElement label="角色名称">
+								<f:fields>
+									<Input value="{role>/name}" />
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="系统角色">
+								<f:fields>
+									<Switch state="{role>/isSys}"/>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="状态">
+								<f:fields>
+									<Switch state="{role>/status}"/>
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
+		</content>
+		<beginButton press="onCloseDialog">
+			<Button text="确认" press="confirmRoleEditor" />
+		</beginButton>
+		<endButton press="onCloseDialog">
+			<Button text="取消" press="cancelRoleEditor" />
+		</endButton>
+	</Dialog>
+</core:FragmentDefinition>

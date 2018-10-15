@@ -1,0 +1,556 @@
+{
+	"_version": "1.8.0",
+	"sap.app": {
+		"id": "harry",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"applicationVersion": {
+			"version": "1.0.0"
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_bluecrystal",
+			"sap_belize"
+		]
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "harry.app.view.App",
+			"type": "XML",
+			"async": true,
+			"id": "app"
+		},
+		"dependencies": {
+			"minUI5Version": "1.30",
+			"libs": {
+				"sap.ui.core": {
+					
+				},
+				"sap.m": {
+					
+				},
+				"sap.tnt": {
+					
+				},
+				"sap.ui.layout": {
+					
+				}
+			}
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "harry.i18n.i18n"
+				}
+			},
+			"alerts": {
+				"type": "sap.ui.model.json.JSONModel",
+				"uri": "app/model/alerts.json"
+			},
+			"customer": {
+				"type": "sap.ui.model.json.JSONModel",
+				"uri": "app/model/customers.json"
+			},
+			"product": {
+				"type": "sap.ui.model.json.JSONModel",
+				"uri": "mockdata/products.json"
+			}
+		},
+		"resources": {
+			"css": [
+				{"uri": "css/style.css"},
+				{"uri": "css/box-shadows.css"}
+			],
+			"js": [
+				{
+					"uri": "js/echarts.js"
+				}
+			]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"controlId": "rootControl",
+				"viewType": "XML",
+				"controlAggregation": "pages",
+				"viewPath": "harry.app.view",
+				"async": true,
+				"bypassed": {
+					"target": "login"
+				}
+			},
+			"routes": [
+				{
+					"pattern": "",
+					"name": "index",
+					"target": "login"
+				},
+				{
+					"pattern": "login",
+					"name": "login",
+					"target": "login"
+				},
+				{
+					"pattern": "main",
+					"name": "main",
+					"target": "main"
+				},
+				{
+					"pattern": "home",
+					"name": "home",
+					"target": "home"
+				},
+				{
+					"pattern": "processList",
+					"name": "processList",
+					"target": "processList"
+				},
+				{
+					"pattern": "processInfo",
+					"name": "processInfo",
+					"target": "processInfo"
+				},
+				{
+					"pattern": "lockScreen",
+					"name": "lockScreen",
+					"target": "lockScreen"
+				},
+				{
+					"pattern": "MasterSettings",
+					"name": "masterSettings",
+					"target": [
+						"detailSettings",
+						"masterSettings"
+					]
+				},
+				{
+					"pattern": "SystemSettings",
+					"name": "systemSettings",
+					"target": "detailSettings"
+				},
+				{
+					"pattern": "Statistics",
+					"name": "statistics",
+					"target": "statistics"
+				},
+				{
+					"pattern": "statisticsEChar",
+					"name": "statisticsEChar",
+					"target": "statisticsEChar"
+				},
+				{
+					"pattern": "MasterMap",
+					"name": "masterMap",
+					"target": [
+						"detailMap",
+						"masterMap"
+					]
+				},
+				{
+					"pattern": "procDefManager",
+					"name": "procDefManager",
+					"target": "procDefManager"
+				},
+				{
+					"pattern": "sessionManager",
+					"name": "sessionManager",
+					"target": "sessionManager"
+				},
+				{
+					"pattern": "systemManager",
+					"name": "systemManager",
+					"target": "systemManager"
+				},
+				{
+					"pattern": "redisManager",
+					"name": "redisManager",
+					"target": "redisManager"
+				},
+				{
+					"pattern": "procStartManager",
+					"name": "procStartManager",
+					"target": "procStartManager"
+				},
+				{
+					"pattern": "masterProcess",
+					"name": "masterProcess",
+					"target": [
+						"detailProcess",
+						"masterProcess"
+					]
+				},
+				{
+					"pattern": "userAdd",
+					"name": "userAdd",
+					"target": "userAdd"
+				},
+				{
+					"pattern": "userList",
+					"name": "userList",
+					"target": "userList"
+				},
+				{
+					"pattern": "userInfo",
+					"name": "userInfo",
+					"target": "userInfo"
+				},
+				{
+					"pattern": "roleManager",
+					"name": "roleManager",
+					"target": "roleManager"
+				},
+				{
+					"pattern": "procDimension",
+					"name": "procDimension",
+					"target": "procDimension"
+				},
+				{
+					"pattern": "procDefinition",
+					"name": "procDefinition",
+					"target": "procDefinition"
+				},
+				{
+					"pattern": "procType",
+					"name": "procType",
+					"target": [
+						"procTypeDetail",
+						"procTypeMaster"
+					]
+				},
+				{
+					"pattern": "procMatcher",
+					"name": "procMatcher",
+					"target": [
+						"procMatcherDetail",
+						"procMatcherMaster"
+					]
+				},
+				{
+					"pattern": "procFilter",
+					"name": "procFilter",
+					"target": [
+						"procFilterDetail",
+						"procFilterMaster"
+					]
+				},
+				{
+					"pattern": "procRole",
+					"name": "procRole",
+					"target": [
+						"procRoleDetail",
+						"procRoleMaster"
+					]
+				},
+				{
+					"pattern": "procTaskEdit",
+					"name": "procTaskEdit",
+					"target": "procTaskEdit"
+				},
+				{
+					"pattern": "T001",
+					"name": "T001",
+					"target": "T001"
+				},
+				{
+					"pattern": "T002",
+					"name": "T002",
+					"target": "T002"
+				},
+				{
+					"pattern": "T003",
+					"name": "T003",
+					"target": "T003"
+				},
+				{
+					"pattern": "T004",
+					"name": "T004",
+					"target": "T004"
+				}
+			],
+			"targets": {
+				"lockScreen": {
+					"viewId": "lockScreen",
+					"viewName": "LockScreen"
+				},
+				"login": {
+					"viewId": "login",
+					"viewName": "Login"
+				},
+				"main": {
+					"viewId": "main",
+					"viewName": "Main"
+				},
+				"home": {
+					"viewId": "home",
+					"viewName": "Home",
+					"parent": "main"
+				},
+				"processList": {
+					"viewId": "processList",
+					"viewName": "process.ProcessList",
+					"parent": "main"
+				},
+				"processInfo": {
+					"viewId": "processInfo",
+					"viewName": "process.ProcessInfo",
+					"parent": "main"
+				},
+				"appSettings": {
+					"viewId": "appSettings",
+					"viewName": "settings.AppSettings",
+					"parent": "main"
+				},
+				"masterSettings": {
+					"viewId": "masterSettings",
+					"viewName": "settings.MasterSettings",
+					"controlId": "appSettings",
+					"controlAggregation": "masterPages",
+					"parent": "appSettings"
+				},
+				"detailSettings": {
+					"viewId": "detailSettings",
+					"viewName": "settings.DetailSettings",
+					"controlId": "appSettings",
+					"controlAggregation": "detailPages",
+					"parent": "appSettings"
+				},
+				"statistics": {
+					"viewId": "statistics",
+					"viewName": "chart.Statistics",
+					"parent": "main"
+				},
+				"statisticsEChar": {
+					"viewId": "statisticsEChar",
+					"viewName": "chart.StatisticsEChar",
+					"parent": "main"
+				},
+				"appMap": {
+					"viewId": "appMap",
+					"viewName": "map.AppMap",
+					"parent": "main"
+				},
+				"masterMap": {
+					"viewId": "masterMap",
+					"viewName": "map.MasterMap",
+					"controlId": "appMap",
+					"controlAggregation": "masterPages",
+					"parent": "appMap"
+				},
+				"detailMap": {
+					"viewId": "detailMap",
+					"viewName": "map.DetailMap",
+					"controlId": "appMap",
+					"controlAggregation": "detailPages",
+					"parent": "appMap"
+				},
+				"procDefManager": {
+					"viewId": "procDefManager",
+					"viewName": "process.ProcDefManager",
+					"parent": "main"
+				},
+				"procStartManager": {
+					"viewId": "procStartManager",
+					"viewName": "process.ProcStartManager",
+					"parent": "main"
+				},
+				"appProcInstance": {
+					"viewId": "appProcInstance",
+					"viewName": "process.AppProcInstance",
+					"parent": "main"
+				},
+				"masterProcess": {
+					"viewId": "masterProcess",
+					"viewName": "process.ProcInstanceMaster",
+					"controlId": "appProcInstance",
+					"controlAggregation": "masterPages",
+					"parent": "appProcInstance"
+				},
+				"detailProcess": {
+					"viewId": "detailProcess",
+					"viewName": "process.ProcInstanceManager",
+					"controlId": "appProcInstance",
+					"controlAggregation": "detailPages",
+					"parent": "appProcInstance"
+				},
+				"systemManager": {
+					"viewId": "systemManager",
+					"viewName": "system.SystemManager",
+					"parent": "main"
+				},
+				"sessionManager": {
+					"viewId": "sessionManager",
+					"viewName": "system.SessionManager",
+					"parent": "main"
+				},
+				"redisManager": {
+					"viewId": "redisManager",
+					"viewName": "system.RedisManager",
+					"parent": "main"
+				},
+				"userAdd": {
+					"viewId": "userAdd",
+					"viewName": "user.UserAdd",
+					"parent": "main"
+				},
+				"userList": {
+					"viewId": "userList",
+					"viewName": "user.UserList",
+					"parent": "main"
+				},
+				"userInfo": {
+					"viewId": "userInfo",
+					"viewName": "user.UserInfo",
+					"parent": "main"
+				},
+				"roleManager": {
+					"viewId": "roleManager",
+					"viewName": "role.RoleManager",
+					"parent": "main"
+				},
+				"procDimension": {
+					"viewId": "procDimension",
+					"viewName": "processConfig.ProcDimension",
+					"parent": "main"
+				},
+				"procDefinition": {
+					"viewId": "procDefinition",
+					"viewName": "processConfig.ProcDefinition",
+					"parent": "main"
+				},
+				"procTypeApp": {
+					"viewId": "procTypeApp",
+					"viewName": "processConfig.ProcTypeApp",
+					"parent": "main"
+				},
+				"procTypeMaster": {
+					"viewId": "procTypeMaster",
+					"viewName": "processConfig.ProcTypeMaster",
+					"controlId": "appProcType",
+					"controlAggregation": "masterPages",
+					"parent": "procTypeApp"
+				},
+				"procTypeDetail": {
+					"viewId": "procTypeDetail",
+					"viewName": "processConfig.ProcTypeDetail",
+					"controlId": "appProcType",
+					"controlAggregation": "detailPages",
+					"parent": "procTypeApp"
+				},
+				"procMatcherApp": {
+					"viewId": "procMatcherApp",
+					"viewName": "processConfig.ProcMatcherApp",
+					"parent": "main"
+				},
+				"procMatcherMaster": {
+					"viewId": "procMatcherMaster",
+					"viewName": "processConfig.ProcMatcherMaster",
+					"controlId": "appProcMatcher",
+					"controlAggregation": "masterPages",
+					"parent": "procMatcherApp"
+				},
+				"procMatcherDetail": {
+					"viewId": "procMatcherDetail",
+					"viewName": "processConfig.ProcMatcherDetail",
+					"controlId": "appProcMatcher",
+					"controlAggregation": "detailPages",
+					"parent": "procMatcherApp"
+				},
+				"procDefinitionApp": {
+					"viewId": "procDefinitionApp",
+					"viewName": "processConfig.ProcDefinitionApp",
+					"parent": "main"
+				},
+				"procDefinitionMaster": {
+					"viewId": "procDefinitionMaster",
+					"viewName": "processConfig.ProcDefinitionMaster",
+					"controlId": "appProcDefinition",
+					"controlAggregation": "masterPages",
+					"parent": "procDefinitionApp"
+				},
+				"procDefinitionDetail": {
+					"viewId": "procDefinitionDetail",
+					"viewName": "processConfig.ProcDefinitionDetail",
+					"controlId": "appProcDefinition",
+					"controlAggregation": "detailPages",
+					"parent": "procDefinitionApp"
+				},
+				"procTaskEdit": {
+					"viewId": "procTaskEdit",
+					"viewName": "processConfig.ProcTaskEdit",
+					"controlId": "appProcDefinition",
+					"controlAggregation": "detailPages",
+					"parent": "procDefinitionApp"
+				},
+				"procFilterApp": {
+					"viewId": "procFilterApp",
+					"viewName": "processConfig.ProcFilterApp",
+					"parent": "main"
+				},
+				"procFilterMaster": {
+					"viewId": "procFilterMaster",
+					"viewName": "processConfig.ProcFilterMaster",
+					"controlId": "appProcFilter",
+					"controlAggregation": "masterPages",
+					"parent": "procFilterApp"
+				},
+				"procFilterDetail": {
+					"viewId": "procFilterDetail",
+					"viewName": "processConfig.ProcFilterDetail",
+					"controlId": "appProcFilter",
+					"controlAggregation": "detailPages",
+					"parent": "procFilterApp"
+				},
+				"procRoleApp": {
+					"viewId": "procRoleApp",
+					"viewName": "processConfig.ProcRoleApp",
+					"parent": "main"
+				},
+				"procRoleMaster": {
+					"viewId": "procRoleMaster",
+					"viewName": "processConfig.ProcRoleMaster",
+					"controlId": "appProcRole",
+					"controlAggregation": "masterPages",
+					"parent": "procRoleApp"
+				},
+				"procRoleDetail": {
+					"viewId": "procRoleDetail",
+					"viewName": "processConfig.ProcRoleDetail",
+					"controlId": "appProcRole",
+					"controlAggregation": "detailPages",
+					"parent": "procRoleApp"
+				},
+				"F001": {
+					"viewId": "F001",
+					"viewName": "fssc.F001",
+					"parent": "main"
+				},
+				"F002": {
+					"viewId": "F002",
+					"viewName": "fssc.F002",
+					"parent": "main"
+				},
+				"F003": {
+					"viewId": "F003",
+					"viewName": "fssc.F003",
+					"parent": "main"
+				},
+				"F004": {
+					"viewId": "F004",
+					"viewName": "fssc.F004",
+					"parent": "main"
+				}
+			}
+		}
+	}
+}

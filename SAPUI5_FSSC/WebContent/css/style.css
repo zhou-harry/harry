@@ -1,0 +1,130 @@
+.sapMInputBase, 
+.sapMInputBaseInner, 
+.sapMInputBasePlaceholder, 
+.sapMSFF,
+.sapMFocus, 
+.sapMSF, 
+.sapMSlt, 
+.sapMSltDefault, 
+.sapMSltHoverable,
+.sapMSltWithArrow,
+.sapMPopoverScroll,
+.sapMSelectList ,
+.sapMSltList-CTX,
+.sapMPopover ,
+.sapMPopoverHorScrollDisabled ,
+.sapMPopoverWithoutBar ,
+.sapMPopoverWithoutFooter ,
+.sapMPopoverWithoutSubHeader, 
+.sapMPopup-CTX ,
+.sapMSltPicker ,
+.sapMSltPicker-CTX ,
+.sapUiSizeCompact ,
+.sapUiShd,
+.sapMSFF>.sapMSFB:not(.sapMSFBF):active, 
+.sapMSFF>.sapMSFB.sapMSFBA,
+.sapUiRespGrid.sapUiRespGridVSpace1>div,
+.sapUiBlockCellContent,
+.sapMFeedIn {
+	-webkit-border-radius: 8px;
+}
+
+.root {
+	background-image: url("../images/bg.png");
+}
+
+.loginFlexBox {
+	-webkit-border-radius: 15px;
+	-webkit-box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+	font-size: 45px;
+	border: 1px solid #bbb;
+	background-color: #F5F5F5;
+	/* background-image: url("../img/logo_bg.png");
+	-moz-background-size:contain;
+    -webkit-background-size:contain;
+    -o-background-size:contain;
+    background-size:contain; */
+}
+
+.logoImg {
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+	width: 100%;
+	height: 100%;
+}
+
+.tileLayout {
+	float: left;
+}
+
+.titleName {
+	font-size: x-large;
+}
+
+.divEChart {
+	width: 100%;
+	min-height: 100px
+}
+.slickDiagram {
+    cursor: pointer;   
+    border: solid 3px orange;
+    border-radius: 5px;
+    box-shadow:0px 0px 30px orange;
+    transition: box-shadow 0.5s;
+    -webkit-transition: box-shadow 0.5s;
+}
+ 
+.slickDiagram:hover {
+    box-shadow:0px 0px 30px gray;
+}
+.welcomeCarouselText {
+	color: white;
+	display: block;
+	position: fixed;
+	bottom: 0;
+	padding: 1rem;
+	font-size: 1.5rem;
+	width: 100%;
+	text-shadow: 0 0 0.125rem black;
+}
+/**
+ * Lock Screen
+ */
+#preloader {
+    height: 5px;
+    background-color: rgba(37, 45, 59, 1.0);
+    z-index: 2000;
+}
+
+.headline-lock {
+    color: rgba(255, 255, 255, 0.5)!important;
+    font-size: 350%;
+    letter-spacing: -1px;
+    background: rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin: 0 auto 20px;
+    border-radius: 66px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 2px 0px rgba(255, 255, 255, 0.1);
+    text-align: center;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.sapMFeedIn {
+    background-color: #ceddec;
+}
+.sapMFeedInFigure {
+    background-color: #ceddec;
+    border-color: #ffffff;
+}
+.sapMNLG-Body{
+    border-style: outset;
+    border-width: 5px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 15px 45px -9px;
+}
+
+
+.sapMNLI-TextWrapper .sapMTextMaxLine{
+    font-family: cursive;
+}

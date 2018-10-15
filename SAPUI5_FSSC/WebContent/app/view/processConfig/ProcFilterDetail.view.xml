@@ -1,0 +1,101 @@
+<core:View xmlns:core="sap.ui.core" 
+		xmlns:mvc="sap.ui.core.mvc" 
+		xmlns="sap.m"
+		xmlns:f="sap.f"
+		xmlns:u="sap.uxap"
+		controllerName="harry.app.controller.processConfig.procFilter" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="规则过滤器信息" showNavButton="true" navButtonPress="navBack">
+		<content>
+			<u:ObjectPageLayout showTitleInHeaderContent="true"
+					  alwaysShowContentHeader="false"
+					  preserveHeaderStateOnScroll="false"
+					  headerContentPinnable="true"
+					  enableLazyLoading="false">
+				<u:headerTitle>
+					<u:ObjectPageDynamicHeaderTitle>
+						<u:expandedHeading>
+							<Title text="{filter>/name}"/>
+						</u:expandedHeading>
+		
+						<u:snappedHeading>
+							<f:Avatar src="sap-icon://cancel-share" displaySize="S"/>
+							<Title text="{filter>/name}"/>
+						</u:snappedHeading>
+		
+						<u:expandedContent>
+							<Text text="【{filter>/filterId}】"/>
+						</u:expandedContent>
+		
+						<u:snappedContent>
+							<Text text="【{filter>/filterId}】"/>
+						</u:snappedContent>
+		
+						<u:actions>
+							<OverflowToolbarButton icon="sap-icon://add" 
+								press="handleMatcherAdd" 
+								visible="{
+									path: 'filter>/type',
+									formatter: '.formatter.v_filterType_2'
+								}"/>
+						</u:actions>
+		
+					</u:ObjectPageDynamicHeaderTitle>
+				</u:headerTitle>
+				<u:headerContent >
+					<VBox visible="{
+							path: 'filter>/type',
+							formatter: '.formatter.v_filterType_3'
+						}">
+						<ObjectAttribute
+							title="主引用规则"
+							text="{filter>/masterName}"
+							active="true"
+							press="handleFeedbacklinkPressed" />
+						<ObjectAttribute
+							title="副引用规则"
+							text="{filter>/slaveName}"
+							active="true"
+							press="handleFeedbacklinkPressed" />
+						<ObjectStatus
+							title="引用关系"
+							text="{
+								path: 'filter>/relation',
+								formatter: '.formatter.relationType'
+							}"
+							state="Warning"/>
+					</VBox>
+				</u:headerContent>
+				<u:sections>
+					<u:ObjectPageSection title="自定义规则" 
+						visible="{
+							path: 'filter>/type',
+							formatter: '.formatter.v_filterType_2'
+						}">
+						<u:subSections>
+							<u:ObjectPageSubSection title=" ">
+								<u:blocks>
+									<List id="matcherid" 
+										growing="true" 
+										mode="Delete"
+										delete="handleMatcherDelete"
+										items="{path: 'matchers>/'}">
+										<ObjectListItem
+											type="Detail"
+											detailPress="handleMatcherEdit"
+											icon="sap-icon://cancel-share" 
+											title="{matchers>dmsKey}" >
+											<attributes>
+												<ObjectAttribute title="匹配集合" text="{matchers>matcher}" />
+												<ObjectAttribute title="匹配范围" text="{matchers>rangeStart}~{matchers>rangeEnd}" />
+											</attributes>
+										</ObjectListItem>
+									</List>
+								</u:blocks>
+							</u:ObjectPageSubSection>
+						</u:subSections>
+					</u:ObjectPageSection>
+				</u:sections>
+			</u:ObjectPageLayout>
+		</content>
+	</Page>
+</core:View>

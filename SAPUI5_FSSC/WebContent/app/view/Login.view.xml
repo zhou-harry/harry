@@ -1,0 +1,39 @@
+<core:View controllerName="harry.app.controller.Login"
+			xmlns:core="sap.ui.core" 
+			xmlns:mvc="sap.ui.core.mvc" 
+			xmlns="sap.m"
+		 	xmlns:html="http://www.w3.org/1999/xhtml">
+	<FlexBox height="100%" alignItems="Center" justifyContent="Center">
+		<items>
+			<FlexBox id="contentBox" direction="Column" alignItems="Center" 
+				width="{
+					path: 'view>/isPhone',
+					formatter: '.formatter.loginWidthValue'
+				}" class="loginFlexBox">
+				<items>
+					<Image src="{
+								path: 'view>/isPhone',
+								formatter: '.formatter.loginImageValue'
+							}" 
+							class="logoImg"/>
+					<Input id="nameInput" type="Text" placeholder="手机号 ..."
+						valueStateText="用户名无效." width="100%" 
+						value="{path : 'user>/userId',type : 'sap.ui.model.type.String',constraints : {minLength: 1,maxLength: 10}}">
+					</Input>
+					<Input id="passwordInput" type="Password" placeholder="密码 ..."
+						valueStateText="密码无效." width="100%"
+						value="{path : 'user>/password',type : 'sap.ui.model.type.String',constraints : {minLength: 1,maxLength: 10}}">
+					</Input>
+					<HBox>
+						<Button id="loginbtn" text="登  陆" press="handleSubmit" icon="sap-icon://log"
+							width="100px">
+							<layoutData>
+								<FlexItemData growFactor="10" />
+							</layoutData>
+						</Button>
+					</HBox>
+				</items>
+			</FlexBox>
+		</items>
+	</FlexBox>
+</core:View>

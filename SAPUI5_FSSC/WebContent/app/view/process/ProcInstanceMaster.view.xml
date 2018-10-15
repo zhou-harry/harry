@@ -1,0 +1,33 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" controllerName="harry.app.controller.process.ProcInstanceMaster"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="流程实例监控" floatingFooter="true" showHeader="false">
+		<content>
+			<List id="procList" items="{process>/}" growing="true"
+				growingThreshold="10">
+				<headerToolbar>
+					<Toolbar>
+						<SearchField id="searchid" liveChange="searchProc" width="100%" />
+						<ToolbarSpacer/>
+						<Button tooltip="高级查询" icon="sap-icon://drop-down-list" press="handleProcInstance"/>
+					</Toolbar>
+				</headerToolbar>
+				<items>
+					<ObjectListItem
+						class="sapUiSmallMarginBegin"
+						title="{process>description}"
+						tooltip="{process>description}"
+						type="Active"
+						press="showProcInfo"
+						number="{process>instanceId}"
+						numberUnit="{= ${process>isEnded}? '已结束':'进行中'}"
+						numberState="{= ${process>isEnded}? 'None':'Success'}">
+						<attributes>
+							<ObjectAttribute text="{process>processName}" />
+						</attributes>
+					</ObjectListItem>
+				</items>
+			</List>
+		</content>
+	</Page>
+</core:View>

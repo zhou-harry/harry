@@ -1,0 +1,52 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+		controllerName="harry.app.controller.processConfig.ProcDefinition" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="{pdef>/name}" showNavButton="true" navButtonPress="navBack">
+		<headerContent>
+			<Button icon="sap-icon://add-activity-2" tooltip="添加任务节点" press="handleTaskAdd"/>
+		</headerContent>
+		<content>
+			<List headerText="任务节点" 
+				mode="Delete"
+				delete="handleTaskDelete"
+				growing="true" 
+				items="{path: 'tasks>/'}">
+				<ObjectListItem
+						type="Active"
+						press="handleTaskEdit"
+						title="【{tasks>taskId}】{tasks>name}"
+						number="{tasks>step}"
+						numberUnit="通过率:{tasks>ratio}"
+						intro="{
+									path: 'tasks>type',
+									formatter: '.formatter.taskType'
+								}">
+					<firstStatus>
+						<ObjectStatus 
+							text="{
+								path: 'tasks>status',
+								formatter: '.formatter.taskStatusText'
+							}" state="{
+								path: 'tasks>status',
+								formatter: '.formatter.taskStatus'
+							}" icon="{
+								path: 'tasks>status',
+								formatter: '.formatter.taskStatusIcon'
+							}" />
+					</firstStatus>
+					<secondStatus>
+						<ObjectStatus visible="{=${tasks>pending}}" 
+							text="业务挂起" 
+							state="Warning" 
+							icon="sap-icon://pending"/>
+					</secondStatus>
+					<attributes>
+						<ObjectAttribute title="匹配规则" text="{tasks>filterName}" />
+						<ObjectAttribute title="选择审批人" text="{=${tasks>isSelect}?'【是】':'【否】'}" />
+						<ObjectAttribute title="持续时间" text="{tasks>duration}秒" />
+						<ObjectAttribute title="过期备选人" text="{tasks>standby}" />
+					</attributes>
+				</ObjectListItem>
+			</List>
+		</content>
+	</Page>
+</core:View>
