@@ -20,6 +20,7 @@ import com.harry.util.session.SessionProvider;
 @Controller
 @RequestMapping("config")
 public class ConfigController {
+	
 	private static Logger logger = Logger.getLogger(ConfigController.class);
 
 	@Resource
