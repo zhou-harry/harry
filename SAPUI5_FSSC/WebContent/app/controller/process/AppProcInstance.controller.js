@@ -1,10 +1,8 @@
-sap.ui.define([ 
-	'harry/app/controller/BaseController', 
-	"sap/ui/Device",
-	"sap/m/MessageToast"
-	], function(BaseController, Device,MessageToast) {
+sap.ui.define([
+		'harry/app/controller/BaseController', "sap/ui/Device", "sap/m/MessageToast"
+], function(BaseController, Device, MessageToast) {
 	"use strict";
-	return BaseController.extend("harry.app.controller.process.AppProcInstance", {
+	var AppProcInstance = BaseController.extend("harry.app.controller.process.AppProcInstance", {
 
 		/**
 		 * Called when a controller is instantiated and its View controls (if
@@ -16,7 +14,7 @@ sap.ui.define([
 		 */
 		onInit : function() {
 			this.bus = sap.ui.getCore().getEventBus();
-			this.bus.subscribe("flexible", "setDetailPage", this.setDetailPage,this);
+			this.bus.subscribe("flexible", "setDetailPage", this.setDetailPage, this);
 		},
 
 		/**
@@ -47,16 +45,17 @@ sap.ui.define([
 		 * @memberOf app.controller.process.ProcAttachment
 		 */
 		onExit : function() {
-			this.bus.unsubscribe("flexible", "setDetailPage",this.setDetailPage, this);
+			this.bus.unsubscribe("flexible", "setDetailPage", this.setDetailPage, this);
 		},
-		setDetailPage: function () {
+		setDetailPage : function() {
 			var app = this.getView().byId("appProcInstance");
-			var mode=app.getMode();
-			if ("HideMode"===mode) {
+			var mode = app.getMode();
+			if ("HideMode" === mode) {
 				app.setMode("ShowHideMode");
-			}else {
+			} else {
 				app.setMode("HideMode");
 			}
 		},
 	})
+	return AppProcInstance;
 });

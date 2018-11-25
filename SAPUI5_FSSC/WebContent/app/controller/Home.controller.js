@@ -6,7 +6,8 @@ sap.ui.define([
 		'harry/app/format/formatter'
 ], function(BaseController, JSONModel, Device, MessageToast, formatter) {
 	"use strict";
-	return BaseController.extend("harry.app.controller.Home", {
+	
+	var AppHome = BaseController.extend("harry.app.controller.Home", {
 		formatter : formatter,
 		_iCarouselTimeout : 0, // a pointer to the current timeout
 		_iCarouselLoopTime : 8000, // loop to next picture after 8 seconds
@@ -91,4 +92,6 @@ sap.ui.define([
 			});
 		}
 	});
+	
+	return AppHome;
 });

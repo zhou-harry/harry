@@ -3,25 +3,16 @@ package com.harry.fssc.shiro;
 import java.util.Collection;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheManager;
-import org.apache.shiro.session.Session;
-import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.subject.SimplePrincipalCollection;
-import org.apache.shiro.subject.Subject;
-import org.apache.shiro.subject.support.DefaultSubjectContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.harry.fssc.model.User;
-import com.harry.fssc.session.RedisSessionDAO;
-import com.harry.fssc.session.SessionUtil;
 import com.harry.fssc.util.Const;
 /**
  * 记录登录次数
@@ -31,9 +22,6 @@ import com.harry.fssc.util.Const;
 public class UserCredentialsMatcher extends HashedCredentialsMatcher {
 
 	private static Logger logger = LoggerFactory.getLogger(UserCredentialsMatcher.class);
-	
-	@Autowired
-    private RedisSessionDAO sessionDAO;
 	
 	private Cache<String, AtomicInteger> passwordRetryCache;
 

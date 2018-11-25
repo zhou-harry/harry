@@ -5,7 +5,7 @@ sap.ui.define([
 	'harry/app/format/formatter'
 ], function (BaseController, MessageToast, JSONModel, formatter) {
 	"use strict";
-	return BaseController.extend("harry.app.controller.settings.MasterSettings", {
+	var MasterSettings= BaseController.extend("harry.app.controller.settings.MasterSettings", {
 
 		formatter: formatter,
 		
@@ -49,5 +49,6 @@ sap.ui.define([
 		onNavButtonPress: function  () {
 			this.getOwnerComponent().myNavBack();
 		}
-	});
+	})
+	return MasterSettings;
 });

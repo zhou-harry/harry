@@ -6,7 +6,7 @@ sap.ui.define([
 	'harry/app/format/formatter'
 ], function (BaseController, MessageToast, MessageBox, JSONModel, formatter) {
 	"use strict";
-	return BaseController.extend("harry.app.controller.processConfig.ProcDefinition", {
+	var ProcDefinition= BaseController.extend("harry.app.controller.processConfig.ProcDefinition", {
 		formatter: formatter,
 /**
 * Called when a controller is instantiated and its View controls (if available) are already created.
@@ -260,4 +260,5 @@ sap.ui.define([
 		);
 	},
 })
+return ProcDefinition;
 });

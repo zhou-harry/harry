@@ -4,7 +4,7 @@ sap.ui.define([
 		'sap/m/MessageToast'
 	], function(BaseController, JSONModel, MessageToast) {
 	"use strict";
-	return BaseController.extend("harry.app.controller.chart.StatisticsEChar", {
+	var StatisticsEChar= BaseController.extend("harry.app.controller.chart.StatisticsEChar", {
 
 	/**
 	 * Called when a controller is instantiated and its View controls (if
@@ -119,4 +119,5 @@ sap.ui.define([
 		MessageToast.show(name + seriesName + value);
 	}
 	})
+	return StatisticsEChar;
 });

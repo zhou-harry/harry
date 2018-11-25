@@ -6,7 +6,7 @@ sap.ui.define([
 	'harry/app/format/formatter'
 ], function(BaseController, jQuery,JSONModel,MessageToast,formatter) {
 	"use strict";
-	return BaseController.extend("harry.app.controller.process.ProcStartManager", {
+	var ProcStartManager = BaseController.extend("harry.app.controller.process.ProcStartManager", {
 		formatter: formatter,
 		/**
 		* Called when a controller is instantiated and its View controls (if available) are already created.
@@ -200,4 +200,5 @@ sap.ui.define([
 			oModel.refresh();
 		},
 	})
+	return ProcStartManager;
 });

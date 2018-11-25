@@ -3,7 +3,7 @@ sap.ui.define([
 		'sap/ui/model/json/JSONModel'
 	], function (BaseController, JSONModel) {
 		"use strict";
-		return BaseController.extend("harry.app.controller.chart.Statistics", {
+		var Statistics = BaseController.extend("harry.app.controller.chart.Statistics", {
 
 			onInit: function () {
 				var oViewModel = new JSONModel({
@@ -38,4 +38,6 @@ sap.ui.define([
 			}
 
 		});
+		
+		return Statistics;
 });

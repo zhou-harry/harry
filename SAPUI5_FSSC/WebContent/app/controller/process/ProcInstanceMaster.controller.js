@@ -20,7 +20,7 @@ sap.ui.define([
 		FilterOperator,
 		formatter) {
 	"use strict";
-	return BaseController.extend("harry.app.controller.process.ProcInstanceMaster", {
+	var ProcInstanceMaster = BaseController.extend("harry.app.controller.process.ProcInstanceMaster", {
 		formatter: formatter,
 		/**
 		* Called when a controller is instantiated and its View controls (if available) are already created.
@@ -182,4 +182,5 @@ sap.ui.define([
 			binding.filter(_oGlobalFilter, "Application");
 		},
 	})
+	return ProcInstanceMaster;
 });

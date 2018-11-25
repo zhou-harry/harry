@@ -9,13 +9,16 @@ sap.ui.define([
 	'harry/app/format/formatter'
 ], function(BaseController, jQuery,JSONModel,MessageToast,SplitContainer, Device,UploadCollectionParameter,formatter) {
 	"use strict";
-	return BaseController.extend("harry.app.controller.process.ProcInstance", {
+	var ProcInstance= BaseController.extend("harry.app.controller.process.ProcInstance", {
 		formatter: formatter,
 		/**
-		* Called when a controller is instantiated and its View controls (if available) are already created.
-		* Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
-		* @memberOf app.view.process.ProcInstanceManager
-		*/
+		 * Called when a controller is instantiated and its View controls (if
+		 * available) are already created. Can be used to modify the View before
+		 * it is displayed, to bind event handlers and do other one-time
+		 * initialization.
+		 * 
+		 * @memberOf app.view.process.ProcInstanceManager
+		 */
 		onInit: function() {
 			this.getView().setModel(new JSONModel(Device), "device");
 			this.bus = sap.ui.getCore().getEventBus();
@@ -23,27 +26,34 @@ sap.ui.define([
 		},
 		
 		/**
-		* Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
-		* (NOT before the first rendering! onInit() is used for that one!).
-		* @memberOf app.view.process.ProcInstanceManager
-		*/
-		//	onBeforeRendering: function() {
+		 * Similar to onAfterRendering, but this hook is invoked before the
+		 * controller's View is re-rendered (NOT before the first rendering!
+		 * onInit() is used for that one!).
+		 * 
+		 * @memberOf app.view.process.ProcInstanceManager
+		 */
+		// onBeforeRendering: function() {
 		//
-		//	},
+		// },
 		
 		/**
-		* Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
-		* This hook is the same one that SAPUI5 controls get after being rendered.
-		* @memberOf app.view.process.ProcInstanceManager
-		*/
-		//	onAfterRendering: function() {
+		 * Called when the View has been rendered (so its HTML is part of the
+		 * document). Post-rendering manipulations of the HTML could be done
+		 * here. This hook is the same one that SAPUI5 controls get after being
+		 * rendered.
+		 * 
+		 * @memberOf app.view.process.ProcInstanceManager
+		 */
+		// onAfterRendering: function() {
 		//
-		//	},
+		// },
 		
 		/**
-		* Called when the Controller is destroyed. Use this one to free resources and finalize activities.
-		* @memberOf app.view.process.ProcInstanceManager
-		*/
+		 * Called when the Controller is destroyed. Use this one to free
+		 * resources and finalize activities.
+		 * 
+		 * @memberOf app.view.process.ProcInstanceManager
+		 */
 		onExit: function() {
 		},
 		/**
@@ -87,7 +97,7 @@ sap.ui.define([
 			}
 		},
 		/**
-		 *  变量视图
+		 * 变量视图
 		 */
 		_procVariables: function(piid) {
 			var oView=this.getView();
@@ -407,7 +417,7 @@ sap.ui.define([
 		handleMasterPress: function (oEvent) {
 			this.bus.publish("flexible", "setDetailPage");
 		},
-		//附件======================================================================
+		// 附件======================================================================
 		onChange: function(oEvent) {
 			var oUploadCollection = oEvent.getSource();
 			// Header Token
@@ -473,7 +483,7 @@ sap.ui.define([
 				MessageToast.show("请添加附件!");
 			}
 		},
-		//Header Setting
+		// Header Setting
 		onBeforeUploadStarts: function(oEvent) {
 			var oNotes = this.getView().byId("notesId");
 			var iData=this.getView().getModel("inst").getData();
@@ -497,7 +507,7 @@ sap.ui.define([
 		 * 附件上载完成事件
 		 */
 		onUploadComplete: function(oEvent) {
-			//刷新附件列表
+			// 刷新附件列表
 			var oData=this.getView().getModel("inst").getData();
 			this._procAttachment(oData.instanceId);
 		},
@@ -513,7 +523,7 @@ sap.ui.define([
 				oUploadCollection.setUploadEnabled(false);
 			}
 		},
-		//附件操作结束======================================================
+		// 附件操作结束======================================================
 		/**
 		 * 点击业务编号
 		 */
@@ -554,4 +564,5 @@ sap.ui.define([
 			this.getView().byId("taskSideContentId").setShowSideContent(false);
 		},
 	})
+	return ProcInstance;
 });

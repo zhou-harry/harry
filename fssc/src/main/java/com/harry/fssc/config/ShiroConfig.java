@@ -85,7 +85,7 @@ public class ShiroConfig {
 		// session持久化操作
 		sessionManager.setSessionDAO(sessionDAO);
 		// session缓存方案
-		sessionManager.setCacheManager(cacheManager);
+//		sessionManager.setCacheManager(cacheManager);
 		// session状态监听
 		List<SessionListener> sessionListeners = new ArrayList<>();
 		sessionListeners.add(new RedisSessionListener());

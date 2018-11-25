@@ -8,6 +8,8 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 
 import com.harry.fssc.util.Const;
@@ -15,6 +17,8 @@ import com.harry.fssc.util.Const;
 @SuppressWarnings("unchecked")
 public class ShiroCache<K, V> implements Cache<K, V> {
 
+	private static Logger logger = LoggerFactory.getLogger(ShiroCache.class);
+	
 	private String cacheKey;
 	private RedisTemplate<K, V> redisTemplate;
 
@@ -26,12 +30,14 @@ public class ShiroCache<K, V> implements Cache<K, V> {
 
 	@Override
 	public V get(K key) throws CacheException {
+		logger.debug("ShiroCache#get:"+key);
 		redisTemplate.boundValueOps(getCacheKey(key)).expire(Const.GLOBAL_SESSION_TIMEOUT, TimeUnit.MILLISECONDS);
 		return redisTemplate.boundValueOps(getCacheKey(key)).get();
 	}
 
 	@Override
 	public V put(K key, V value) throws CacheException {
+		logger.debug("ShiroCache#put:"+key);
 		V old = get(key);
 		redisTemplate.boundValueOps(getCacheKey(key)).set(value);
 		return old;
@@ -39,6 +45,7 @@ public class ShiroCache<K, V> implements Cache<K, V> {
 
 	@Override
 	public V remove(K key) throws CacheException {
+		logger.debug("ShiroCache#remove:"+key);
 		V old = get(key);
 		redisTemplate.delete(getCacheKey(key));
 		return old;
@@ -46,16 +53,19 @@ public class ShiroCache<K, V> implements Cache<K, V> {
 
 	@Override
 	public void clear() throws CacheException {
+		logger.debug("ShiroCache#clear");
 		redisTemplate.delete(keys());
 	}
 
 	@Override
 	public int size() {
+		logger.debug("ShiroCache#size");
 		return keys().size();
 	}
 
 	@Override
 	public Set<K> keys() {
+		logger.debug("ShiroCache#keys");
 		return redisTemplate.keys(getCacheKey("*"));
 	}
 

@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 import com.harry.fssc.model.User;
 import com.harry.fssc.util.Const;
 
-import io.lettuce.core.codec.StringCodec;
 
 /**
  * redis实现共享session
