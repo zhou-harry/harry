@@ -6,8 +6,9 @@ sap.ui.define([
 	"sap/m/SplitContainer",
 	"sap/ui/Device",
 	"sap/m/UploadCollectionParameter",
-	'harry/app/format/formatter'
-], function(BaseController, jQuery,JSONModel,MessageToast,SplitContainer, Device,UploadCollectionParameter,formatter) {
+	'harry/app/format/formatter',
+	"sap/ui/unified/FileUploaderXHRSettings"
+], function(BaseController, jQuery,JSONModel,MessageToast,SplitContainer, Device,UploadCollectionParameter,formatter,FileUploaderXHRSettings) {
 	"use strict";
 	var ProcInstance= BaseController.extend("harry.app.controller.process.ProcInstance", {
 		formatter: formatter,
@@ -64,7 +65,7 @@ sap.ui.define([
 			var _procKey=null;
 			if (_oData&&_oData.data) {
 				this.getView().setModel(new JSONModel({visible:true,height:$(window).height()}),"v");
-				_oData.data.uploadUrl="../../../fssc/bpm/uploadAttachment";
+				_oData.data.uploadUrl=this.JsonModel().getPath()+"bpm/uploadAttachment";
 				this.getView().setModel(new JSONModel(_oData.data),"inst");
 				this.initProc("ProcVariable");
 				this.initProc("ProcHistory");
@@ -420,6 +421,15 @@ sap.ui.define([
 		// 附件======================================================================
 		onChange: function(oEvent) {
 			var oUploadCollection = oEvent.getSource();
+			//设置跨域文件上传
+			var fu=oEvent.getSource()._oFileUploader;
+			
+			var xhrs=fu.getXhrSettings();
+			if (xhrs==undefined) {
+				fu.setXhrSettings(new FileUploaderXHRSettings("id_xhrs",{
+					withCredentials: true
+				}))
+			}
 			// Header Token
 			var oCustomerHeaderToken = new UploadCollectionParameter({
 				name: "x-csrf-token",

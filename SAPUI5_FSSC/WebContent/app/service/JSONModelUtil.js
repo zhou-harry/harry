@@ -26,6 +26,10 @@ sap.ui.define(["sap/ui/model/json/JSONModel",'sap/m/MessageToast' ],
 						  data: oParameters,
 						  type: sType,
 						  timeout: 10000,
+						  xhrFields:{
+					            withCredentials:true 
+							  },
+							  crossDomain: true,
 						  success: function(oData) {
 							if (!oData) {
 								jQuery.sap.log.fatal("The following problem occurred: No data was retrieved by service: " + sURL);
@@ -60,12 +64,20 @@ sap.ui.define(["sap/ui/model/json/JSONModel",'sap/m/MessageToast' ],
 						  }.bind(this)
 						});
 				},
+//				getPath: function(){
+//					var curWwwPath=window.document.location.href;
+//					var pathName=window.document.location.pathname;
+//				    var pos=curWwwPath.indexOf(pathName);
+//				    var localhostPath=curWwwPath.substring(0,pos);
+//				    return localhostPath+"/fssc/";
+//				},
+				
 				getPath: function(){
 					var curWwwPath=window.document.location.href;
 					var pathName=window.document.location.pathname;
-				    var pos=curWwwPath.indexOf(pathName);
+				    var pos=curWwwPath.indexOf(":8086"+pathName);
 				    var localhostPath=curWwwPath.substring(0,pos);
-				    return localhostPath+"/fssc/";
+				    return localhostPath+":8081/";
 				},
 			});
 		}
